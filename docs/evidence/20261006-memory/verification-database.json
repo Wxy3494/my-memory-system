@@ -1,0 +1,55 @@
+{
+  "python": "3.12.14",
+  "date": "2026-10-06",
+  "tests_run": 70,
+  "passed": 69,
+  "skipped": [
+    {
+      "test": "test_real_chinese_and_english_vectors (test_memory_integration.LiveEmbedding.test_real_chinese_and_english_vectors)",
+      "reason": "real paid embedding probe not explicitly enabled"
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "python_syntax_files": 25,
+  "sql_check": {
+    "migration": "parsed",
+    "application_statements_parsed": 15,
+    "limitation": "syntax_only_not_pgvector_execution"
+  },
+  "compose_yaml": "parsed_not_docker_runtime_verified",
+  "source_hashes": {
+    "app\\memory\\chunking.py": "6a9bad7d0209fd523f87f5f5d88b9d617c60c2b9d536ee5950dd02beef5fe493",
+    "app\\memory\\config.py": "285a5fa62fd697fa321de0890ebec3e53e1697174d71458d3c63ca12d2f4198c",
+    "app\\memory\\embeddings.py": "60aca99949df4f495edfb196da2e5b6181a4eae12a9040b5e5e89a6584eaf867",
+    "app\\memory\\errors.py": "5e0772face1cca3fccbbd273e0ad88142c936ab399300bb3126f3baa485e4542",
+    "app\\memory\\limits.py": "3d5be32c9aab8b92a00036d8a7487ac1d93df81e030969529b5628df1e493581",
+    "app\\memory\\retrieval.py": "377b9709f80cb89dd5be322a10e28fa633fa2f1d5b584dd66ccdd9ea4677e605",
+    "app\\memory\\routes.py": "21a143fce44c0c18a712a8e0883afd022ac7cc3e02d254f1acdd41bd97ae4cb1",
+    "app\\memory\\schemas.py": "707dff5ad575a8f9263692f9b459314b1e5f749ea6372ac68892f86b1f8746a5",
+    "app\\memory\\service.py": "5145407634db990b73cb857548aadb58bceb3bd000d59685f5f10380c2b1e5f6",
+    "app\\memory\\store.py": "4a69e6557fd19f28673de24c3cb515202d2b4fc475bed686a94f8005ed2720a0",
+    "app\\memory\\__init__.py": "dd8e5f5e97d7a33634d58a88d286f959d5b5fb6a247ea25963c723f1448ca689",
+    "app\\memory_main.py": "794a1df9f514ddff4f0aa2c6d0b1acc30e9ea6bbe5a784d15ea3e70a2ad4812e",
+    "app\\main.py": "2703ddbb4dcf4a90f72d282374d2fbd48874e2bcce49ef9462a61041b43707e6",
+    "app\\observability.py": "ba459d0c64309e3f8d8665a05e96a6e4622e13f73c4ee6b56f1d755c6cd4ec52",
+    "scripts\\memory_admin.py": "de81de52389f1a92a700809ba5feed3407a325d0e0500bcc4a96feae06e97844",
+    "scripts\\memory_smoke.py": "772850253a63bc212e692154c8173b7158261a48646aa6fca895905c3f23f83e",
+    "scripts\\verify_memory.py": "69fb179bf9f477d0513e1811e78ba51ec612012a3b5dce75c8bb82bdaafd7752",
+    "scripts\\verify_memory_launch.py": "af0de606e0643a5da274fe3786dfda8ece7fedc903b1853f86ce83820aba685b",
+    "evals\\build_memory_cases.py": "c0e6a1900efbb5fd0f0a9ddf1c7f2c9a50a227fe92303997e387e3c40e6f9830",
+    "evals\\memory_eval.py": "baf14366c724057d2f0f8c743bff33c35bf91b8989b75080faf51625767d5e2e",
+    "evals\\memory_load.py": "db5c530b57422451fb00d6d380edc0b22cdba5e513ec9a27b7fb77c06e20e1f3",
+    "tests\\test_memory_config.py": "ed53cbd85b0546604df07c2bcd40d17e312a8a6be23f5e01e0f55a341d014bb6",
+    "tests\\test_memory_contract.py": "34c166ed040c666079b649eb12b9f69fb58fddace38430c66036bb2bd93c1e5c",
+    "tests\\test_memory_evaluation.py": "5e46c0be13e421a9a813895a375b49bc02c27d858c9c12749e6d0f58d79c1c67",
+    "tests\\test_memory_integration.py": "634d6cf8ec5639439d75bbf5f5e5b54af3855a145ccd6d949df117c33ce519fe",
+    "migrations\\001_memory.sql": "6136d30138ca3b2de6805d857f1369bee9506d737fc989e17aee5c1a28d5ca93",
+    "compose.memory.yaml": "b6e1228e5972b33fac075d1c6c10d0653a7c1f4e77f5b6839ac3b10f8a87fde0",
+    "Dockerfile.memory": "b8dbc3d60b4c1e4cf1dd36ee277266ed352a34417ea66b04c72dc50893ba0e03",
+    "requirements-memory.txt": "52056a4dd89a3a608cbc01636ef723420a5b31eeff49256281d8e4bb5594f709",
+    "requirements.txt": "5ed5a4cad2e96b7e98aefa3f0c0b99525a2126d9ac76f1bce67cae021006a230"
+  },
+  "limits": "Offline tests use fakes. Real PostgreSQL/provider/public/platform acceptance requires separate evidence."
+}

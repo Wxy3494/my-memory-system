@@ -1,0 +1,40 @@
+{
+  "cases": 60,
+  "evidence_cases": 56,
+  "no_answer_cases": 4,
+  "recomputed_case_metrics": 180,
+  "dataset_and_source_hashes_match": true,
+  "categories": {
+    "explicit_fact": 12,
+    "cross_session_multi_evidence": 12,
+    "temporal_update": 12,
+    "user_isolation": 12,
+    "no_answer": 4,
+    "long_message": 4,
+    "ellipsis_roles": 4
+  },
+  "summary": {
+    "dataset_cases": 60,
+    "completed": 60,
+    "failed": 0,
+    "namespace": "local-eval:db963092abe343acac760634dbf3c00b:",
+    "search_ms_p50": 314.026,
+    "search_ms_p95": 552.043,
+    "duplicate_database_writes": "not_measured_by_HTTP_evaluator",
+    "recall@5": 1.0,
+    "complete_coverage@5": 1.0,
+    "leakage_count@5": 0,
+    "audit_errors@5": 0,
+    "no_answer_unrelated_count@5": 20,
+    "recall@20": 1.0,
+    "complete_coverage@20": 1.0,
+    "leakage_count@20": 0,
+    "audit_errors@20": 0,
+    "no_answer_unrelated_count@20": 80,
+    "recall@100": 1.0,
+    "complete_coverage@100": 1.0,
+    "leakage_count@100": 0,
+    "audit_errors@100": 0,
+    "no_answer_unrelated_count@100": 100
+  }
+}

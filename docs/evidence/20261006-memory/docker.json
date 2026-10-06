@@ -1,0 +1,30 @@
+{
+  "health_status": 200,
+  "memory_ready_status": 503,
+  "readiness": {
+    "status": "not_ready",
+    "checks": {
+      "configuration": "ok",
+      "database_and_migration": "ok",
+      "embedding": "not_probed_or_expired"
+    }
+  },
+  "openapi_status": 200,
+  "wrong_token_status": 401,
+  "invalid_top_k_status": 422,
+  "offline_image_build": "passed",
+  "compose_config_and_startup": "passed",
+  "migration": "completed_successfully",
+  "provider_credentials": "synthetic nonfunctional values only",
+  "real_provider_quality": "not_tested",
+  "https": "not_tested",
+  "image": "tracememory:v0",
+  "image_id": "sha256:71dc6f080cd4a74c1f6d3372fd76f06d4aa9f64ef8ae29d71bcc9dddb7cecda8",
+  "image_bytes": 102309878,
+  "runtime_python": "3.13.15",
+  "runtime_user": "memory",
+  "sentence_transformers_installed": false,
+  "online_build": "failed_container_DNS",
+  "qa_resources_cleaned": true,
+  "old_rag_services_still_running": true
+}

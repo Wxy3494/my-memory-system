@@ -1,0 +1,180 @@
+[
+  {
+    "id": "policy-weekend",
+    "payload": {
+      "question": "我想咨询现货发货安排，周日计入工作日吗？"
+    },
+    "expected_route": "faq_rag",
+    "required": "RULE-SHIPPING-01",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "现货商品通常在付款后2个工作日内安排发货，工作日不包含周末和法定节假日，因此周日不计入工作日。",
+        "route": "faq_rag",
+        "sources": [
+          "RULE-SHIPPING-01 | docs/faq.md:19-23 | 版本=2026-09-30-v3"
+        ],
+        "needs_human": false
+      },
+      "request_id": "d4aae70b-d3f7-4865-908b-5f8c300205d3",
+      "ms": 1103.2270190000872
+    },
+    "passed": true
+  },
+  {
+    "id": "policy-presale",
+    "payload": {
+      "question": "请告诉我预售商品发货时间以什么为准？"
+    },
+    "expected_route": "faq_rag",
+    "required": "RULE-SHIPPING-01",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "预售商品的发货时间以商品页面说明为准。",
+        "route": "faq_rag",
+        "sources": [
+          "RULE-SHIPPING-01 | docs/faq.md:19-23 | 版本=2026-09-30-v3"
+        ],
+        "needs_human": false
+      },
+      "request_id": "b5305b4f-b7c3-499d-944c-020929d2a044",
+      "ms": 936.535866999975
+    },
+    "passed": true
+  },
+  {
+    "id": "personal-purchase",
+    "payload": {
+      "question": "我购买的商品发货了吗？"
+    },
+    "expected_route": "order_lookup",
+    "required": "请提供订单号",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "请提供订单号，以便查询准确的订单状态。",
+        "route": "order_lookup",
+        "sources": [],
+        "needs_human": false
+      },
+      "request_id": "3d2430f3-82b9-410d-bf4d-9d9a9a75c7be",
+      "ms": 1.9938389999651918
+    },
+    "passed": true
+  },
+  {
+    "id": "refund-associated-order",
+    "payload": {
+      "question": "请查退款进度，谢谢",
+      "order_id": "ORD-1002",
+      "refund_id": "REF-2002"
+    },
+    "expected_route": "refund_lookup",
+    "required": "已退款",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "模拟退款 REF-2002 的状态是已退款，更新于 2026-09-25 13:00。",
+        "route": "refund_lookup",
+        "sources": [
+          "模拟退款记录 REF-2002"
+        ],
+        "needs_human": false
+      },
+      "request_id": "1ef02238-ecf9-44ed-a265-7c854f1af481",
+      "ms": 1.0768699999061937
+    },
+    "passed": true
+  },
+  {
+    "id": "refund-no-order",
+    "payload": {
+      "question": "我的订单的退款状态如何？",
+      "refund_id": "REF-2001"
+    },
+    "expected_route": "refund_lookup",
+    "required": "审核中",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "模拟退款 REF-2001 的状态是审核中，更新于 2026-09-25 12:00。",
+        "route": "refund_lookup",
+        "sources": [
+          "模拟退款记录 REF-2001"
+        ],
+        "needs_human": false
+      },
+      "request_id": "a582989e-0b26-4008-8f5d-0e66f9322ce0",
+      "ms": 0.9992519999286742
+    },
+    "passed": true
+  },
+  {
+    "id": "refund-missing",
+    "payload": {
+      "question": "我的订单退款进度如何？",
+      "order_id": "ORD-1002"
+    },
+    "expected_route": "refund_lookup",
+    "required": "请提供退款单号",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "请提供退款单号，以便查询准确的退款状态。",
+        "route": "refund_lookup",
+        "sources": [],
+        "needs_human": false
+      },
+      "request_id": "71fd22df-22ae-44a0-98ca-2a103c69a854",
+      "ms": 0.9422929999800544
+    },
+    "passed": true
+  },
+  {
+    "id": "refund-unknown",
+    "payload": {
+      "question": "退款状态请查一下",
+      "order_id": "ORD-1002",
+      "refund_id": "REF-404"
+    },
+    "expected_route": "handoff",
+    "required": "未查到模拟退款",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "未查到模拟退款 REF-404。请核对退款单号；仍有疑问请联系人工客服。",
+        "route": "handoff",
+        "sources": [],
+        "needs_human": true
+      },
+      "request_id": "a9d9f478-2a7e-436c-be55-6f97ca3d87bd",
+      "ms": 0.835145999985798
+    },
+    "passed": true
+  },
+  {
+    "id": "order-both",
+    "payload": {
+      "question": "请查订单进度",
+      "order_id": "ORD-1002",
+      "refund_id": "REF-2002"
+    },
+    "expected_route": "order_lookup",
+    "required": "待发货",
+    "actual": {
+      "status": 200,
+      "body": {
+        "answer": "模拟订单 ORD-1002 的状态是待发货，更新于 2026-09-25 11:00。",
+        "route": "order_lookup",
+        "sources": [
+          "模拟订单记录 ORD-1002"
+        ],
+        "needs_human": false
+      },
+      "request_id": "cd6d11b6-a85d-4ce5-ba2f-4afddf0207e8",
+      "ms": 0.8841479999546209
+    },
+    "passed": true
+  }
+]

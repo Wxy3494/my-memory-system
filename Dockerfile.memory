@@ -1,0 +1,14 @@
+FROM python:3.13.15-slim-bookworm
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+WORKDIR /app
+COPY requirements-memory.txt requirements-memory.lock.txt ./
+RUN python -m pip install --no-cache-dir -r requirements-memory.txt -c requirements-memory.lock.txt \
+    && python -m pip check \
+    && useradd --create-home --uid 10001 memory
+COPY app/ ./app/
+COPY migrations/ ./migrations/
+COPY scripts/ ./scripts/
+COPY evals/memory_eval.py evals/memory_load.py ./evals/
+USER memory
+EXPOSE 8000
+CMD ["python", "-m", "uvicorn", "app.memory_main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

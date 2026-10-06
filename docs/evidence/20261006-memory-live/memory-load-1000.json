@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "users": [
+    "local-load:b9d35d20913e44199813a73b97cd1f9d:0"
+  ],
+  "requested_messages_per_user": 1000,
+  "concurrency": 1,
+  "ingest_seconds": 38.47918731500067,
+  "add_batches_completed": 10,
+  "search_completed": 20,
+  "add_ms_p50": 3353.3360919991537,
+  "add_ms_p95": 6151.150005998716,
+  "search_ms_p50": 336.07699000094726,
+  "search_ms_p95": 385.80611999896064,
+  "errors": [],
+  "storage_and_peak_memory": "measure_on_server_separately"
+}

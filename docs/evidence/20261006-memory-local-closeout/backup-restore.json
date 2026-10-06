@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-06",
+  "status": "passed",
+  "scope": "Local synthetic data only; same PostgreSQL instance, isolated temporary restore database",
+  "source_database_untouched": true,
+  "temporary_database_removed": true,
+  "all_tables_counts_and_md5_row_fingerprints_match": true,
+  "md5_scope": "Restore consistency check, not a cryptographic authenticity claim",
+  "model_calls": 0,
+  "backup_file_sha256": "4b3031621117b22880b6c2ad849a1912143a6aa07410e80ade5c474c7806ebdf",
+  "tables": {
+    "schema_version": {
+      "rows": 1,
+      "fingerprint": "c64cdf5b7b08c934aede83c8369e4f9b"
+    },
+    "ingest_requests": {
+      "rows": 272,
+      "fingerprint": "008cb917071ac4261cf55a44eb66b1e3"
+    },
+    "messages": {
+      "rows": 3569,
+      "fingerprint": "fbaef78ae7069ddc522f0735d62b0aaa"
+    },
+    "chunks": {
+      "rows": 3737,
+      "fingerprint": "b6671de78b8742ae1aec3099b1bf32b0"
+    },
+    "chunk_sources": {
+      "rows": 3737,
+      "fingerprint": "df576b0bef5137dedc4a3ab542f571fa"
+    }
+  },
+  "limitation": "Not host/volume disaster recovery or public API acceptance"
+}

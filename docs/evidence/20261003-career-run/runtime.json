@@ -1,0 +1,1 @@
+{"cpu_count": 28, "cuda": null, "fastapi": "0.141.1", "openai": "3.22.1", "python": "3.13.15", "sentence_transformers": "6.1.0", "torch": "2.14.0+cpu"}

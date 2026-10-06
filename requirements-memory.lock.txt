@@ -1,0 +1,23 @@
+# Constraints for the competition runtime, matching the 2026-10-06 local test packages.
+annotated-doc==0.0.5
+annotated-types==0.8.0
+anyio==4.15.1
+certifi==2026.7.22
+click==8.5.0
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.20
+numpy==2.3.5
+pgvector==0.5.0
+prometheus-client==0.26.0
+psycopg==3.3.6
+psycopg-binary==3.3.6
+pydantic==2.13.5
+pydantic-core==2.46.5
+python-dotenv==1.2.3
+starlette==1.7.0
+typing-extensions==4.16.0
+typing-inspection==0.4.4
+tzdata==2026.5
+uvicorn==0.54.0

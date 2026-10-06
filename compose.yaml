@@ -1,0 +1,155 @@
+# 定义数据库、API 和按需运行的独立入库任务。
+# 切换前先备份，并停止原 rag-pgvector，避免两个实例共用数据目录。
+name: rag-stage4
+
+services:
+  api:
+    # 使用已构建的项目镜像；修改代码后可通过 Compose 重新构建。
+    image: ai-customer-service-rag:stage4
+    build:
+      context: .
+    pull_policy: never
+    environment:
+      # 纯检索和模拟业务查询无需生成密钥；/ask 的 FAQ 路径会明确降级。
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-flash}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING:-false}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT:-}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+      LANGSMITH_WORKSPACE_ID: ${LANGSMITH_WORKSPACE_ID:-}
+      # Compose 将容器专用连接串注入代码已有的 DATABASE_URL。
+      DATABASE_URL: ${DATABASE_URL_DOCKER:?请在 .env 中填写容器数据库连接串}
+      # 此处是容器内路径；挂载来源仍使用 .env 中的宿主机路径。
+      HF_HUB_CACHE: /models/hub
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - type: bind
+        source: ${HF_HUB_CACHE:?请在 .env 中填写本机模型缓存目录}
+        target: /models/hub
+        read_only: true
+        bind:
+          # 路径填写错误时直接报错，避免自动创建一个空模型目录。
+          create_host_path: false
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      # 沿用进程存活接口；此检查不会加载模型或调用 DeepSeek。
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).close()"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    stop_grace_period: 30s
+    restart: unless-stopped
+
+  index:
+    # 与 API 共用镜像，运行入库脚本后退出，不启动 HTTP 服务。
+    image: ai-customer-service-rag:stage4
+    pull_policy: never
+    profiles: [tools]
+    command: ["python", "index_faq.py"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL_DOCKER:?请在 .env 中填写容器数据库连接串}
+      HF_HUB_CACHE: /models/hub
+    volumes:
+      # 入库时允许首次下载或补齐模型缓存，API 仍只读使用缓存。
+      - type: bind
+        source: ${HF_HUB_CACHE:?请在 .env 中填写本机模型缓存目录}
+        target: /models/hub
+        bind:
+          create_host_path: false
+      # 使用宿主机最新 FAQ，修改文档后无需为入库重新构建镜像。
+      - type: bind
+        source: ./docs
+        target: /app/docs
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  db:
+    # 使用本机已有的 PostgreSQL 17 镜像，不自动拉取更新。
+    image: pgvector/pgvector:pg17
+    pull_policy: never
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_DB: ragdb
+      # 从项目 .env 读取；空值或缺失时拒绝继续解析配置。
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?请在 .env 中填写现有数据库密码}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "rag", "-d", "ragdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    stop_grace_period: 30s
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.13.3
+    profiles: [monitoring]
+    pull_policy: never
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=7d
+      - --storage.tsdb.retention.size=256MB
+    ports: ["127.0.0.1:9090:9090"]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus_data:/prometheus
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:9090/-/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:13.2.3
+    profiles: [monitoring]
+    pull_policy: never
+    environment:
+      # Local demonstration uses an anonymous Viewer and no initial admin account.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: "false"
+    ports: ["127.0.0.1:3000:3000"]
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/api/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  pgdata:
+    # 查找已有卷；如果不存在就报错，不自动创建空卷。
+    external: true
+    name: rag_pgdata

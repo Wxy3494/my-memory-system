@@ -1,0 +1,16 @@
+.venv/
+.cache/
+.vscode/settings.json
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+!.env.memory.example
+.test-deps/
+.test-tools/
+.test-runtime/
+.venv-memory/
+evals/results/
+deploy/wheelhouse/*.whl
+releases/

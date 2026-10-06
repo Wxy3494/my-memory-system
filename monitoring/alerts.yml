@@ -1,0 +1,31 @@
+groups:
+  - name: rag-service
+    rules:
+      - alert: RagApiDown
+        expr: up{job="rag-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "RAG API cannot be scraped"
+      - alert: RagDependencyNotReady
+        expr: rag_dependency_ready{job="rag-api"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "RAG local dependency is not ready"
+      - alert: RagTechnicalFailure
+        expr: sum(increase(rag_ask_outcomes_total{technical_failure="true"}[5m])) > 0
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "RAG request encountered a technical failure"
+      - alert: RagRetrievalTechnicalFailure
+        expr: sum(increase(rag_retrieve_outcomes_total{technical_failure="true"}[5m])) > 0
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Retrieval-only request encountered a technical failure"

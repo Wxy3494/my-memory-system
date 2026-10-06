@@ -1,0 +1,7 @@
+{
+  "database_container_restart_persistence": true,
+  "postgresql_version": "17.11 (Debian 17.11-1.pgdg12+2)",
+  "pgvector_version": "0.8.6",
+  "embedding": "synthetic test vectors, no provider API",
+  "synthetic_record_cleaned": true
+}

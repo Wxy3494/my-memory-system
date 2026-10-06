@@ -1,0 +1,345 @@
+[
+  {
+    "name": "annotated-doc",
+    "version": "0.0.5",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Homepage, https://github.com/fastapi/annotated-doc",
+      "Documentation, https://github.com/fastapi/annotated-doc",
+      "Repository, https://github.com/fastapi/annotated-doc",
+      "Issues, https://github.com/fastapi/annotated-doc/issues",
+      "Changelog, https://github.com/fastapi/annotated-doc/release-notes.md"
+    ],
+    "license_files": [
+      "annotated_doc-0.0.5.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101"
+  },
+  {
+    "name": "annotated-types",
+    "version": "0.8.0",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Homepage, https://github.com/annotated-types/annotated-types",
+      "Source, https://github.com/annotated-types/annotated-types",
+      "Changelog, https://github.com/annotated-types/annotated-types/releases"
+    ],
+    "license_files": [
+      "annotated_types-0.8.0.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0"
+  },
+  {
+    "name": "anyio",
+    "version": "4.15.1",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Documentation, https://anyio.readthedocs.io/en/latest/",
+      "Changelog, https://anyio.readthedocs.io/en/stable/versionhistory.html",
+      "Source code, https://github.com/agronholm/anyio",
+      "Issue tracker, https://github.com/agronholm/anyio/issues"
+    ],
+    "license_files": [
+      "anyio-4.15.1.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101"
+  },
+  {
+    "name": "certifi",
+    "version": "2026.7.22",
+    "declared_license": "MPL-2.0",
+    "project_urls": [
+      "Source, https://github.com/certifi/python-certifi"
+    ],
+    "license_files": [
+      "certifi-2026.7.22.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775"
+  },
+  {
+    "name": "click",
+    "version": "8.5.0",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Changes, https://click.palletsprojects.com/page/changes/",
+      "Chat, https://discord.gg/pallets",
+      "Documentation, https://click.palletsprojects.com/",
+      "Donate, https://palletsprojects.com/donate",
+      "Source, https://github.com/pallets/click/"
+    ],
+    "license_files": [
+      "click-8.5.0.dist-info/licenses/LICENSE.txt"
+    ],
+    "wheel_sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360"
+  },
+  {
+    "name": "fastapi",
+    "version": "0.141.1",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Homepage, https://github.com/fastapi/fastapi",
+      "Documentation, https://fastapi.tiangolo.com/",
+      "Repository, https://github.com/fastapi/fastapi",
+      "Issues, https://github.com/fastapi/fastapi/issues",
+      "Changelog, https://fastapi.tiangolo.com/release-notes/"
+    ],
+    "license_files": [
+      "fastapi-0.141.1.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "bfb91aa2d334c61cb35ba9a116fc123b3d3df31640b801cf57a7a78ec3f603b3"
+  },
+  {
+    "name": "h11",
+    "version": "0.16.0",
+    "declared_license": "MIT",
+    "project_urls": [],
+    "license_files": [
+      "h11-0.16.0.dist-info/licenses/LICENSE.txt"
+    ],
+    "wheel_sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"
+  },
+  {
+    "name": "httpcore",
+    "version": "1.0.9",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Documentation, https://www.encode.io/httpcore",
+      "Homepage, https://www.encode.io/httpcore/",
+      "Source, https://github.com/encode/httpcore"
+    ],
+    "license_files": [
+      "httpcore-1.0.9.dist-info/licenses/LICENSE.md"
+    ],
+    "wheel_sha256": "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55"
+  },
+  {
+    "name": "httpx",
+    "version": "0.28.1",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Changelog, https://github.com/encode/httpx/blob/master/CHANGELOG.md",
+      "Documentation, https://www.python-httpx.org",
+      "Homepage, https://github.com/encode/httpx",
+      "Source, https://github.com/encode/httpx"
+    ],
+    "license_files": [
+      "httpx-0.28.1.dist-info/licenses/LICENSE.md"
+    ],
+    "wheel_sha256": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"
+  },
+  {
+    "name": "idna",
+    "version": "3.20",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Changelog, https://github.com/kjd/idna/blob/master/HISTORY.md",
+      "Issue tracker, https://github.com/kjd/idna/issues",
+      "Source, https://github.com/kjd/idna"
+    ],
+    "license_files": [
+      "idna-3.20.dist-info/licenses/LICENSE.md"
+    ],
+    "wheel_sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+  },
+  {
+    "name": "numpy",
+    "version": "2.3.5",
+    "declared_license": "See package bundled license text",
+    "project_urls": [
+      "homepage, https://numpy.org",
+      "documentation, https://numpy.org/doc/",
+      "source, https://github.com/numpy/numpy",
+      "download, https://pypi.org/project/numpy/#files",
+      "tracker, https://github.com/numpy/numpy/issues",
+      "release notes, https://numpy.org/doc/stable/release"
+    ],
+    "license_files": [
+      "numpy/_core/include/numpy/random/LICENSE.txt",
+      "numpy/ma/LICENSE",
+      "numpy/random/LICENSE.md",
+      "numpy-2.3.5.dist-info/LICENSE.txt"
+    ],
+    "wheel_sha256": "11e06aa0af8c0f05104d56450d6093ee639e15f24ecf62d417329d06e522e017"
+  },
+  {
+    "name": "pgvector",
+    "version": "0.5.0",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Homepage, https://github.com/pgvector/pgvector-python"
+    ],
+    "license_files": [
+      "pgvector-0.5.0.dist-info/licenses/LICENSE.txt"
+    ],
+    "wheel_sha256": "fedc9800894e6da2be51358d7b7c574bf34f247ca741a5a09513622135f5964f"
+  },
+  {
+    "name": "prometheus_client",
+    "version": "0.26.0",
+    "declared_license": "Apache-2.0 AND BSD-2-Clause",
+    "project_urls": [
+      "Homepage, https://github.com/prometheus/client_python",
+      "Documentation, https://prometheus.github.io/client_python/"
+    ],
+    "license_files": [
+      "prometheus_client-0.26.0.dist-info/licenses/LICENSE",
+      "prometheus_client-0.26.0.dist-info/licenses/NOTICE"
+    ],
+    "wheel_sha256": "fa93d06737aa02bacd05794768508bb97d2fbee28cb3bca04eaae92f0ca953d6"
+  },
+  {
+    "name": "psycopg",
+    "version": "3.3.6",
+    "declared_license": "LGPL-3.0-only",
+    "project_urls": [
+      "Homepage, https://psycopg.org/",
+      "Documentation, https://psycopg.org/psycopg3/docs/",
+      "Changes, https://psycopg.org/psycopg3/docs/news.html",
+      "Code, https://github.com/psycopg/psycopg",
+      "Issue Tracker, https://github.com/psycopg/psycopg/issues",
+      "Funding, https://github.com/sponsors/dvarrazzo"
+    ],
+    "license_files": [
+      "psycopg-3.3.6.dist-info/licenses/LICENSE.txt"
+    ],
+    "wheel_sha256": "a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631"
+  },
+  {
+    "name": "psycopg-binary",
+    "version": "3.3.6",
+    "declared_license": "LGPL-3.0-only",
+    "project_urls": [
+      "Homepage, https://psycopg.org/",
+      "Documentation, https://psycopg.org/psycopg3/docs/",
+      "Changes, https://psycopg.org/psycopg3/docs/news.html",
+      "Code, https://github.com/psycopg/psycopg",
+      "Issue Tracker, https://github.com/psycopg/psycopg/issues",
+      "Funding, https://github.com/sponsors/dvarrazzo"
+    ],
+    "license_files": [
+      "psycopg_binary-3.3.6.dist-info/licenses/",
+      "psycopg_binary-3.3.6.dist-info/licenses/LICENSE.txt"
+    ],
+    "wheel_sha256": "cec5ea900390897d0b46130f60bc2883bf19c314f9044235217c8be88b0ef269"
+  },
+  {
+    "name": "pydantic",
+    "version": "2.13.5",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Homepage, https://github.com/pydantic/pydantic",
+      "Documentation, https://docs.pydantic.dev",
+      "Funding, https://github.com/sponsors/samuelcolvin",
+      "Source, https://github.com/pydantic/pydantic",
+      "Changelog, https://docs.pydantic.dev/latest/changelog/"
+    ],
+    "license_files": [
+      "pydantic-2.13.5.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "346a034f080da3755d8e9cb5e00e8b07de1d39e4f6e2c87d8ab7cafa0b269a73"
+  },
+  {
+    "name": "pydantic_core",
+    "version": "2.46.5",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Funding, https://github.com/sponsors/samuelcolvin",
+      "Homepage, https://github.com/pydantic",
+      "Source, https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+    ],
+    "license_files": [
+      "pydantic_core-2.46.5.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "6f7b393a8b3da82f5c1fc0751e6d01ac6c55b93c18226a60bdfba4a724efafd1"
+  },
+  {
+    "name": "python-dotenv",
+    "version": "1.2.3",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Source, https://github.com/theskumar/python-dotenv"
+    ],
+    "license_files": [
+      "python_dotenv-1.2.3.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "904552145e8bfed22162c09dab1c2b9b54fefa7b23ba780f4f26ca0316b0f0d9"
+  },
+  {
+    "name": "starlette",
+    "version": "1.7.0",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Homepage, https://github.com/Kludex/starlette",
+      "Documentation, https://starlette.dev/",
+      "Changelog, https://starlette.dev/release-notes/",
+      "Funding, https://github.com/sponsors/Kludex",
+      "Source, https://github.com/Kludex/starlette"
+    ],
+    "license_files": [
+      "starlette-1.7.0.dist-info/licenses/LICENSE.md"
+    ],
+    "wheel_sha256": "67f8e99895493dd2911a03f11314af6ceebeae4e704bb9f43dfc6a9db151c93e"
+  },
+  {
+    "name": "typing-inspection",
+    "version": "0.4.4",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Homepage, https://github.com/pydantic/typing-inspection",
+      "Documentation, https://pydantic.github.io/typing-inspection/dev/",
+      "Source, https://github.com/pydantic/typing-inspection",
+      "Changelog, https://github.com/pydantic/typing-inspection/blob/main/HISTORY.md"
+    ],
+    "license_files": [
+      "typing_inspection-0.4.4.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147"
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "declared_license": "PSF-2.0",
+    "project_urls": [
+      "Bug Tracker, https://github.com/python/typing_extensions/issues",
+      "Changes, https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+      "Documentation, https://typing-extensions.readthedocs.io/",
+      "Home, https://github.com/python/typing_extensions",
+      "Q & A, https://github.com/python/typing/discussions",
+      "Repository, https://github.com/python/typing_extensions"
+    ],
+    "license_files": [
+      "typing_extensions-4.16.0.dist-info/licenses/LICENSE"
+    ],
+    "wheel_sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+  },
+  {
+    "name": "tzdata",
+    "version": "2026.5",
+    "declared_license": "Apache-2.0",
+    "project_urls": [
+      "Bug Reports, https://github.com/python/tzdata/issues",
+      "Source, https://github.com/python/tzdata",
+      "Documentation, https://tzdata.python.org"
+    ],
+    "license_files": [
+      "tzdata-2026.5.dist-info/licenses/LICENSE",
+      "tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE"
+    ],
+    "wheel_sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
+  },
+  {
+    "name": "uvicorn",
+    "version": "0.54.0",
+    "declared_license": "BSD-3-Clause",
+    "project_urls": [
+      "Changelog, https://uvicorn.dev/release-notes",
+      "Funding, https://github.com/sponsors/Kludex",
+      "Homepage, https://uvicorn.dev/",
+      "Source, https://github.com/Kludex/uvicorn"
+    ],
+    "license_files": [
+      "uvicorn-0.54.0.dist-info/licenses/LICENSE.md"
+    ],
+    "wheel_sha256": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf"
+  }
+]

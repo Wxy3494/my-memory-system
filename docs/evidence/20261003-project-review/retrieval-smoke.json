@@ -1,0 +1,772 @@
+{
+  "schema": "retrieval-benchmark-v1",
+  "started_at": "2026-10-03T06:42:05.901763+00:00",
+  "finished_at": "2026-10-03T06:42:06.691961+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "workload": [
+    [
+      {
+        "question": "我的订单状态",
+        "order_id": "ORD-1001"
+      },
+      "order_lookup",
+      null
+    ],
+    [
+      {
+        "question": "付款后一般多久发货？"
+      },
+      "faq_retrieval",
+      "RULE-SHIPPING-01"
+    ],
+    [
+      {
+        "question": "我的退款状态",
+        "refund_id": "REF-2001"
+      },
+      "refund_lookup",
+      null
+    ],
+    [
+      {
+        "question": "七天无理由退货有什么条件？"
+      },
+      "faq_retrieval",
+      "RULE-RETURN-01"
+    ]
+  ],
+  "concurrency": 2,
+  "requested_count": 40,
+  "cache_mode": "no_query_or_answer_cache; model_warmed_by_probes",
+  "client": {
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.13.12",
+    "logical_cpus": 28
+  },
+  "local_source_sha256": {
+    "app\\faq_answer.py": "0133a6447ce2bb2524803c8b57fd496468c7338c3876606341b35904fbe3caea",
+    "app\\faq_loader.py": "5e252c2dc9d6d80abebd28c2a9f58af6283ed149f7232cc576f06bfab9a0ca61",
+    "app\\faq_search.py": "caacf9d932654928a51e2018e6b2f9f7529fd5487c2f164104431bc6adf91835",
+    "app\\main.py": "62c5514a70a4af562574980efe72e4726e205ce335276f06be59d24202a837aa",
+    "app\\mock_data.py": "b2e265468a8b92f3a598db7582e2e56082a4a95d27c3ed73c9050caad50357ba",
+    "app\\observability.py": "b46c51f7e93779f10f7da527af36295673a7d143596dd4d6ac4f76e92332eefc",
+    "app\\readiness.py": "93c85dfb65516c79332d6279c6df32e1b7a23a5404c1f7300a898aee2b6ef31f",
+    "app\\tracing.py": "facbd472968b373973fd421123bd51eb369793da9ef26d59668d128a3dab05cc"
+  },
+  "faq_sha256": "05a86dbf4c7c097fc834eebbaefb35826ddc292f3d65f64534e41d15d1cc8284",
+  "warmups": [
+    {
+      "index": 0,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "d3273e9a-084e-459b-a478-1d337cbcd0b8",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 117.60039999899163
+    },
+    {
+      "index": 1,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "0db52984-1727-4566-bb22-e62d567ff428",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 46.99649999929534
+    },
+    {
+      "index": 2,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "da270b3c-93f6-41c0-a356-7be3ca73c930",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.200199999308097
+    },
+    {
+      "index": 3,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "95f8791f-1027-479a-ae03-00b189095b72",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 33.35019999940414
+    }
+  ],
+  "summary": {
+    "requests": 40,
+    "passed": 40,
+    "errors": 0,
+    "error_rate": 0.0,
+    "elapsed_s": 0.5863879000007728,
+    "completed_qps": 68.2142315691495,
+    "successful_qps": 68.2142315691495,
+    "p50_ms": 25.527199999487493,
+    "p95_ms": 64.64950000008685,
+    "p99_ms": 115.1506000005611
+  },
+  "by_route": {
+    "faq_retrieval": {
+      "requests": 20,
+      "passed": 20,
+      "errors": 0,
+      "error_rate": 0.0,
+      "elapsed_s": 0.5863879000007728,
+      "completed_qps": 34.10711578457475,
+      "successful_qps": 34.10711578457475,
+      "p50_ms": 42.27790000004461,
+      "p95_ms": 64.80569999985164,
+      "p99_ms": 115.1506000005611
+    },
+    "order_lookup": {
+      "requests": 10,
+      "passed": 10,
+      "errors": 0,
+      "error_rate": 0.0,
+      "elapsed_s": 0.5863879000007728,
+      "completed_qps": 17.053557892287376,
+      "successful_qps": 17.053557892287376,
+      "p50_ms": 6.1659000002691755,
+      "p95_ms": 20.38639999955194,
+      "p99_ms": 20.38639999955194
+    },
+    "refund_lookup": {
+      "requests": 10,
+      "passed": 10,
+      "errors": 0,
+      "error_rate": 0.0,
+      "elapsed_s": 0.5863879000007728,
+      "completed_qps": 17.053557892287376,
+      "successful_qps": 17.053557892287376,
+      "p50_ms": 7.131899999876623,
+      "p95_ms": 25.527199999487493,
+      "p99_ms": 25.527199999487493
+    }
+  },
+  "samples": [
+    {
+      "index": 0,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "b008c2d3-92b4-4854-bba1-d3b0c788cf5c",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 20.38639999955194
+    },
+    {
+      "index": 1,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "a5972569-79a9-487e-b67f-56ba0dc4e368",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 34.372600001006504
+    },
+    {
+      "index": 2,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "9d8c9be2-c877-4658-8d76-19063de313a2",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.883400001039263
+    },
+    {
+      "index": 3,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "3dd87555-353c-4cf5-99fe-39e643c0e0d2",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 44.321000001218636
+    },
+    {
+      "index": 4,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "6f7ee56e-f8aa-41b9-85d3-23df9ccb48e1",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 7.682900000872905
+    },
+    {
+      "index": 5,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "be4aee8f-505f-4b93-96b2-9ca16d161bc4",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 35.344600000826176
+    },
+    {
+      "index": 6,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "e1d1f587-131f-48a2-8b79-d0a5a9d23cb2",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 25.527199999487493
+    },
+    {
+      "index": 7,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "1cb430ca-fd00-46e3-b604-c8fe3e49ef29",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 33.9192000010371
+    },
+    {
+      "index": 8,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "63fb99d5-0db7-4616-9c5b-f19223811f5b",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 6.538700001328834
+    },
+    {
+      "index": 9,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "dc0017d3-00a0-43a2-96d6-686661d592cc",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 39.33620000134397
+    },
+    {
+      "index": 10,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "4f71448d-6a83-4a3c-af3d-0c034ae16b62",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 7.6860999997734325
+    },
+    {
+      "index": 11,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "56cd6767-7e80-4396-a8b4-6acbba8443a5",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 35.17390000160958
+    },
+    {
+      "index": 12,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "0ff705a5-769d-4115-acf4-6858b23b6c1a",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.672699999195174
+    },
+    {
+      "index": 13,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "879a152e-09be-4259-a77a-503d995c3090",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 46.261699999377015
+    },
+    {
+      "index": 14,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "56a56e3a-7262-4ae4-9c85-a66870c70b16",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.479800000102841
+    },
+    {
+      "index": 15,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "10b7d3c5-8914-45b0-9514-30604e5c9e20",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 40.394699999524164
+    },
+    {
+      "index": 16,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "60093cbd-5799-4af8-98ff-3b124dc78611",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.445099999633385
+    },
+    {
+      "index": 17,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "bf019261-d458-40ba-bcae-f3c85998a255",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 46.1632999995345
+    },
+    {
+      "index": 18,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "28004ea6-ea4c-44ac-afc0-9ae359fcf6ac",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 7.607199999256409
+    },
+    {
+      "index": 19,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "14b4904e-7535-4adb-8d5d-24bd54ade7ac",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 115.1506000005611
+    },
+    {
+      "index": 20,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "5b7d40a8-503f-459c-b0ba-49be03215892",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.980699999781791
+    },
+    {
+      "index": 21,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "4f0283ba-89b5-4a3a-933e-d6f0d593bfdb",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 64.80569999985164
+    },
+    {
+      "index": 22,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "d6289e0e-9fc9-4725-97c2-0671426b960e",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 7.131899999876623
+    },
+    {
+      "index": 23,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "5a1316a5-d8f2-4327-a3b1-ae91b1a27d99",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 57.175699999788776
+    },
+    {
+      "index": 24,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "0df851cb-625d-4dab-a89d-6cc302a3ae3d",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 4.579599999487982
+    },
+    {
+      "index": 25,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "c12c5af0-02d5-45f1-892d-712757c2cc52",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 63.36560000090685
+    },
+    {
+      "index": 26,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "b76d37e3-7ae1-41fa-a2ae-74a28b3ada2c",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 6.014000000504893
+    },
+    {
+      "index": 27,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "ebf24df9-9017-4266-8e27-1a07d1b2f336",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 52.50010000054317
+    },
+    {
+      "index": 28,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "14710307-30b9-4512-9e92-4852488bc408",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 6.677000001218403
+    },
+    {
+      "index": 29,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "39e1f4bf-7a71-427a-9968-188688682795",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 41.229099999327445
+    },
+    {
+      "index": 30,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "17ce165c-61a1-45e1-849c-ed11d4b073fd",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 7.539899999756017
+    },
+    {
+      "index": 31,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "7bfb5243-07fb-4f35-acb5-9a55c7619d99",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 55.28119999871706
+    },
+    {
+      "index": 32,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "92834586-b31f-4caf-bf02-0bd769487714",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 6.398800000170013
+    },
+    {
+      "index": 33,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "d4ded0f0-5c72-4a17-89dc-9b1ce2986be7",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 42.24840000097174
+    },
+    {
+      "index": 34,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "803739ff-0fd3-4abf-a288-3bfdfef9c4ac",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 8.23110000055749
+    },
+    {
+      "index": 35,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "7b70d410-6dee-4917-a9cc-f84c480615eb",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 64.64950000008685
+    },
+    {
+      "index": 36,
+      "workload_index": 0,
+      "expected_route": "order_lookup",
+      "status": 200,
+      "route": "order_lookup",
+      "reason": "record_found",
+      "request_id": "67d41c86-af81-4bd2-9b82-3e03450e4fdd",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 6.1659000002691755
+    },
+    {
+      "index": 37,
+      "workload_index": 1,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "45af1ee4-e670-48d8-bb41-b32d849be9f3",
+      "chunk_ids": [
+        "RULE-SHIPPING-01",
+        "RULE-RETURN-01",
+        "RULE-REFUND-01"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 42.27790000004461
+    },
+    {
+      "index": 38,
+      "workload_index": 2,
+      "expected_route": "refund_lookup",
+      "status": 200,
+      "route": "refund_lookup",
+      "reason": "record_found",
+      "request_id": "dfa900d3-0b34-4795-be06-3637c02762ef",
+      "chunk_ids": [],
+      "passed": true,
+      "error": null,
+      "ms": 5.391300001065247
+    },
+    {
+      "index": 39,
+      "workload_index": 3,
+      "expected_route": "faq_retrieval",
+      "status": 200,
+      "route": "faq_retrieval",
+      "reason": "candidates_found",
+      "request_id": "d60a7374-9381-4ecb-9d08-c3ae479ae58c",
+      "chunk_ids": [
+        "RULE-RETURN-01",
+        "RULE-RETURN-02",
+        "RULE-RETURN-03"
+      ],
+      "passed": true,
+      "error": null,
+      "ms": 27.7685000000929
+    }
+  ],
+  "limitation": "Closed-loop finite workload; local hashes do not prove server image identity. Record server image, CPU/RAM, FAQ count and monitoring state separately. P99 is nearest-rank over all attempts, including failures; no generation or cache-hit claim."
+}

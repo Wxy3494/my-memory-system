@@ -1,0 +1,10 @@
+# Lightweight competition runtime; FAQ/BGE/DeepSeek are intentionally absent.
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+psycopg[binary]==3.3.6
+pgvector==0.5.0
+numpy==2.3.5
+httpx==0.28.1
+prometheus-client==0.26.0
+python-dotenv[cli]==1.2.3

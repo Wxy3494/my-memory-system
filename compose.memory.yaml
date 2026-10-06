@@ -1,0 +1,62 @@
+name: tracememory
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: tracememory
+      POSTGRES_USER: memory
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Fill POSTGRES_PASSWORD in .env.memory}
+    volumes: [memory_pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U memory -d tracememory"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  migrate:
+    image: tracememory:v0
+    build:
+      context: .
+      dockerfile: ${MEMORY_DOCKERFILE:-Dockerfile.memory}
+    env_file: ["${MEMORY_ENV_FILE:-.env.memory}"]
+    environment:
+      DATABASE_URL: postgresql://memory:${POSTGRES_PASSWORD}@db:5432/tracememory
+    command: [python, scripts/memory_admin.py, migrate]
+    depends_on:
+      db: {condition: service_healthy}
+    restart: "no"
+  api:
+    image: tracememory:v0
+    build:
+      context: .
+      dockerfile: ${MEMORY_DOCKERFILE:-Dockerfile.memory}
+    env_file: ["${MEMORY_ENV_FILE:-.env.memory}"]
+    environment:
+      DATABASE_URL: postgresql://memory:${POSTGRES_PASSWORD}@db:5432/tracememory
+    ports: ["127.0.0.1:${MEMORY_LOCAL_PORT:-8000}:8000"]
+    depends_on:
+      db: {condition: service_healthy}
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).close()"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    stop_grace_period: 60s
+  edge:
+    image: caddy:2
+    profiles: [https]
+    environment:
+      MEMORY_PUBLIC_HOST: ${MEMORY_PUBLIC_HOST:-localhost}
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - memory_caddy_data:/data
+      - memory_caddy_config:/config
+    depends_on: [api]
+    restart: unless-stopped
+volumes:
+  memory_pgdata:
+  memory_caddy_data:
+  memory_caddy_config:
