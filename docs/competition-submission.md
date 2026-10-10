@@ -39,7 +39,7 @@ Add 使用 request_id、user_id、session_id、messages，保留 role、content 
 
 | 项目 | 规格或实际口径 |
 |---|---|
-| 服务器 | 阿里云轻量，新加坡，Ubuntu 24.04，2 vCPU、1 GiB RAM、30 GiB ESSD；来自控制台截图 |
+| 服务器 | 阿里云轻量，新加坡，Ubuntu 24.04，2 vCPU、4 GiB RAM、50 GiB 系统盘，峰值公网带宽 200 Mbps；依据 2026-10-10 控制台截图 |
 | 存储 | PostgreSQL/pgvector，容器 tracememory-db-1，Compose 持久卷 memory_pgdata |
 | 已有运行记录 | 平台 Smoke 截图：Add/Search 并发上限 16/16、Top K 100、46/46 完成；并发值是配置上限 |
 | 请求体默认保护 | Add/Search 8 MiB，超过返回 413 |

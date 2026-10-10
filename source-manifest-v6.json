@@ -193,9 +193,9 @@
     },
     {
       "path": "docs/competition-submission.md",
-      "sha256": "7f929d9c1b33b9953a151cd2d5619e548f0ace060a8cd5a282a50bb4a30bf877",
+      "sha256": "39e3aebb936d43c3d4d8c763bfeeba1f6eb30d2513f8ed0f80ce7c14669eb565",
       "source_sha256": "4e72b8ccb6c3ba3c1919d64ec627c22119abc6fd316a87668aeeb5235be76b5e",
-      "publication_change": "first-person prose; removed conversational decisions and employment wording"
+      "publication_change": "deployment documentation: current server specifications"
     },
     {
       "path": "docs/compose-acceptance.md",
