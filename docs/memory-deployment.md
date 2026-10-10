@@ -130,7 +130,7 @@ python -m dotenv -f .env.memory run -- python evals/memory_load.py --base-url ht
 
 memory_eval 需在本机运行，因为镜像不包含 JSONL 数据集；镜像包含评测脚本供自行复制数据后使用。先小样核算费用，然后逐步增至每用户 1千、1万、10万记录；脚本记录的是消息数，实际片段数用数据库查验。服务器另测 RSS、数据库占用、磁盘增长和模型 tokens 配额。不能把离线单元测试耗时作为线上 P95。
 
-正式前记录 Git commit、镜像 digest、源码哈希、模型/维度、分块和检索配置、域名、并发和实测容量。用户已授权继续完成剩余收尾，本地快照通过 Git 保存，包与实际 commit 见 `releases/release-info.json`；用户已授权公开 GitHub 仓库并选择 MIT 许可证；实际链接与固定 Commit 待上传验证。正式部署后需再次冻结一致的代码与镜像。平台 Smoke/Full 由获得的 Eval Key 在官方页面执行，自建 smoke 不代替平台 Smoke。
+正式前记录 Git commit、镜像 digest、源码哈希、模型/维度、分块和检索配置、域名、并发和实测容量。本地快照通过 Git 保存，包与实际 commit 见 `releases/release-info.json`；项目使用 MIT 许可证；实际链接与固定 Commit 待上传验证。正式部署后需再次冻结一致的代码与镜像。平台 Smoke/Full 由获得的 Eval Key 在官方页面执行，自建 smoke 不代替平台 Smoke。
 
 ## 7. 清理与备份
 
@@ -140,6 +140,6 @@ memory_eval 需在本机运行，因为镜像不包含 JSONL 数据集；镜像�
 docker compose --env-file .env.memory -f compose.memory.yaml exec api python scripts/memory_admin.py purge-user --user-id "完整用户ID" --confirm-user-id "完整用户ID"
 ```
 
-该命令级联删除该用户原文/向量/来源/幂等记录，不删其他用户或 FAQ。清理不可恢复，先核对 ID。Full 运行期间不得清除平台已写数据。平台任务完成后按官方期限清理业务数据以及备份、快照、派生文件和副本；本地输出只用于自己的合成数据。没有启动未经授权的自动清理任务。
+该命令级联删除该用户原文/向量/来源/幂等记录，不删其他用户或 FAQ。清理不可恢复，先核对 ID。Full 运行期间不得清除平台已写数据。平台任务完成后按官方期限清理业务数据以及备份、快照、派生文件和副本；本地输出只用于自己的合成数据。
 
 备份可通过 `pg_dump` 导出 `memory` schema；恢复必须验证同一 pipeline 签名及计数。本机自建合成库的 dump/独立临时库恢复已完成，五张表计数和全行一致性指纹匹配，见 `evidence/20261006-memory-local-closeout/backup-restore.json`；没有完成恢复后的 HTTP 搜索、服务器故障切换、整机恢复或公网容量验收。正式任务的责任人、30 天期限及全副本清单流程见 `memory-data-operations.md`，目前没有执行正式数据删除。

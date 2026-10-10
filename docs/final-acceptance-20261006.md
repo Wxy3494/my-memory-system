@@ -1,14 +1,14 @@
 # TraceMemory 最终验收记录（尚未通过发布验收）
 
-检查日期：2026-10-06。用户授权直接验收、修复并整理项目。只改验收工具和说明，未修改 API、数据库迁移、模型或检索配置，未安装系统软件、操作生产数据库或重启生产服务。
+检查日期：2026-10-06。这份记录覆盖项目验收、检查工具修复和材料整理。只改验收工具和说明，未修改 API、数据库迁移、模型或检索配置，未安装系统软件、操作生产数据库或重启生产服务。
 
 ## 本轮实测
 
 ### 后续云端截图验收（2026-10-06 23:06，北京时间）
 
-用户在阿里云 Workbench 执行 `sudo docker exec tracememory-api-1 python scripts/memory_smoke.py --base-url http://127.0.0.1:8000 --output /tmp/cloud-acceptance.json`，截图显示 `status=passed`、`check_existing=false`、`result_count=3`。检查项包括 exact_echo、immediate_search_and_timestamp、retry_same_evidence、conflict_409、wrong_token_401、incremental_write、cross_session_evidence_role_and_top100、empty_other_user、api_process_recent_embedding_readiness。
+我在阿里云 Workbench 执行 `sudo docker exec tracememory-api-1 python scripts/memory_smoke.py --base-url http://127.0.0.1:8000 --output /tmp/cloud-acceptance.json`，截图显示 `status=passed`、`check_existing=false`、`result_count=3`。检查项包括 exact_echo、immediate_search_and_timestamp、retry_same_evidence、conflict_409、wrong_token_401、incremental_write、cross_session_evidence_role_and_top100、empty_other_user、api_process_recent_embedding_readiness。
 
-此结果支持云端容器内真实模型与数据库的小样闭环通过。原始 JSON 目前保存在服务器容器 `/tmp/cloud-acceptance.json`，本机尚未获取；这里明确是用户截图观察，没有伪造本地原始报告。只有 3 条结果，不能证明满 100 条、大规模容量或重启持久化。截图同时显示 `platform_smoke=not_performed` 和数据库重复计数未由 HTTP 测量。
+此结果支持云端容器内真实模型与数据库的小样闭环通过。原始 JSON 目前保存在服务器容器 `/tmp/cloud-acceptance.json`，本机尚未获取；这里记录我的终端截图观察，本机没有对应的原始报告。只有 3 条结果，不能证明满 100 条、大规模容量或重启持久化。截图同时显示 `platform_smoke=not_performed` 和数据库重复计数未由 HTTP 测量。
 
 下文关于公网本地凭据 401 的历史结果仍有效：容器自己的配置通过不代表本地客户端凭据已同步，也不代表外网完整链路已验收。下一步通过 `http://aixuexi.asia` 运行同一容器内的 smoke，验证域名和 Nginx 路径；请求仍从服务器发起，须与独立外网验收分开记录。
 
@@ -42,10 +42,10 @@
 |---|---|
 | 云端真实模型闭环 | 用户最新截图显示容器内和域名路径小样均通过；服务器原始 JSON 待获取。独立外网闭环待验证 |
 | 独立外网正确鉴权 | 未通过。安全同步最终 API 密钥到客户端配置，再运行公网 smoke，保存完整脱敏证据 |
-| 重启与版本一致 | API 重启持久化小样经用户截图确认通过；运行文件哈希、最终镜像和申报 commit 一致性仍待核对 |
+| 重启与版本一致 | API 重启持久化小样经我的终端截图确认通过；运行文件哈希、最终镜像和申报 commit 一致性仍待核对 |
 | 最终服务器容量 | 只有历史本机 1000 条串行样本。正式声明的并发、长请求、数据规模和模型配额仍需实测 |
 | 公开仓库 | 本地公开快照 uploaded=false，主项目未配置 remote。若已人工上传，补真实 URL 与 commit 后验核 |
-| 开源组别模型规定 | 官网 Full 检查项要求 Add 预期使用 gpt-4o-mini，通用架构说明又允许自选内部实现。当前无 LLM 的方法须确认适用性，不能擅自勾选符合 |
+| 开源组别模型规定 | 官网 Full 检查项要求 Add 预期使用 gpt-4o-mini，通用架构说明又允许自选内部实现。当前无 LLM 的方法须确认适用性，以所选组别的适用规则为准 |
 | 申请与官方 Smoke/Full | 本地记录未申请，无 Eval Key、官方 Job ID 或审核记录。代码与小样检查不能替代官方流程 |
 
 浏览器控制工具两次连接 Edge/Workbench 失败，无法接管当前已登录的云端终端。没有尝试用自制浏览器协议、读取浏览器凭据或从截图获取密钥。此限制阻止了云端执行，不影响已完成的本地和公开 HTTP 检查。

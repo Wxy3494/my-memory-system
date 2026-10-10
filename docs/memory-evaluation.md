@@ -2,7 +2,7 @@
 
 ## 当前推进顺序
 
-2026-10-06，用户决定将服务器购买和公网部署放到最后。先推进本地检索质量评测、失败题检查、容量测试与提交材料。
+这份记录汇总 2026-10-06 的本地检索质量评测、失败题检查和容量测试。
 
 已依次完成开发集前 10 题小样、完整 60 题开发集，以及固定代码和配置下的 40 题留出验收。前 10 题是开发集子集，不额外计入 100 题。下一步进行同一用户记忆增长的容量测试，不重复已完成的质量评测。
 
@@ -10,7 +10,7 @@
 
 ## 当前实际结果
 
-开发集基线已运行：用户执行真实模型 vector 模式的 60 题开发集，Codex 保存并复算逐题报告。60/60 完成，0 失败；56 道有标注证据题 Recall@5/20/100 均为 1.0；4 道无答案题单独计数，不计入证据召回分母。用户泄露与来源审计错误均为 0。Search P50=314.026ms、P95=552.043ms，仅是本地小数据集串行测试。数据和源码哈希匹配，180 个逐题 cutoff 指标复算一致。见 `evidence/20261006-memory-live/dev60-vector.json` 与 `dev60-verification.json`。
+开发集基线已运行：我执行了真实模型 vector 模式的 60 题开发集，逐题报告由 Codex 辅助保存和复算。60/60 完成，0 失败；56 道有标注证据题 Recall@5/20/100 均为 1.0；4 道无答案题单独计数，不计入证据召回分母。用户泄露与来源审计错误均为 0。Search P50=314.026ms、P95=552.043ms，仅是本地小数据集串行测试。数据和源码哈希匹配，180 个逐题 cutoff 指标复算一致。见 `evidence/20261006-memory-live/dev60-vector.json` 与 `dev60-verification.json`。
 
 40 题留出验收也已完成：40/40 完成，0 失败；37 道有证据题 Recall@5/20/100 和完整覆盖率均为 1.0；3 道无答案题单独计数。用户泄露和来源审计错误均为 0，Search P50=315.155ms、P95=478.722ms。报告的数据和源码哈希与本地文件匹配，代码和配置与开发集一致；120 个逐题 cutoff 指标复算一致。见 `evidence/20261006-memory-live/holdout40-vector.json` 与 `holdout40-verification.json`。
 
@@ -24,7 +24,7 @@
 
 测试后一次 Docker stats 快照：API 79.11MiB、DB 74.07MiB，合计 153.18MiB；不是测试峰值，不含宿主系统、Docker 与 HTTPS 开销，不能据此保证 0.5GB 或 1GB 服务器适用。memory schema 全部表及索引合计 27,983,872 字节，包含此前评测数据，不是本次 1000 条的独立存储增量。并发、更大同用户数据、峰值和实际云服务器仍未验收。
 
-2026-10-06 后续用户执行的真实模型与 API 小样验收已通过，见 [本地真实验收](evidence/20261006-memory-live/acceptance.md)、[Add/Search 检查](evidence/20261006-memory-live/memory-smoke.json)和 [API 重启检查](evidence/20261006-memory-live/memory-restart.json)。两份 JSON 已实际核对，重启前后均返回同一组合成用户的 3 条记忆。它们补充真实模型运行证据，不改写下面历史单元测试的通过/跳过数量。
+2026-10-06 后续我的真实模型与 API 小样验收已通过，见 [本地真实验收](evidence/20261006-memory-live/acceptance.md)、[Add/Search 检查](evidence/20261006-memory-live/memory-smoke.json)和 [API 重启检查](evidence/20261006-memory-live/memory-restart.json)。两份 JSON 已实际核对，重启前后均返回同一组合成用户的 3 条记忆。它们补充真实模型运行证据，不改写下面历史单元测试的通过/跳过数量。
 
 2026-10-06，Python 3.12.14。当前详细记录在 `docs/evidence/20261006-memory/verification.json` 与 `unit-tests.txt`。
 

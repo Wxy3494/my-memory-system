@@ -10,4 +10,4 @@
 2. 当前个人已选择 MIT 并准备公开固定版本；请确认该学生原型适用的组别，特别是没有生成模型组件的 Add 应如何申请，不预先声称已获资格认可。
 3. AI 辅助构建代码的来源、人工署名和方法改动披露是否有指定格式或补充要求？
 
-出处（2026-10-06读取）：[参赛说明](https://agentmemoryleaderboard.ai/rules)、[API 指南](https://agentmemoryleaderboard.ai/api-guide)。本文件不代表主办方答复，不含密钥，没有代发邮件。
+出处（2026-10-06读取）：[参赛说明](https://agentmemoryleaderboard.ai/rules)、[API 指南](https://agentmemoryleaderboard.ai/api-guide)。本文件不代表主办方答复，不含密钥。

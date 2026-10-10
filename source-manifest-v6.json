@@ -33,15 +33,15 @@
     },
     {
       "path": "NOTICE.md",
-      "sha256": "6e2e558e3ba4b0e14d902417fffa88a306a322c02f4253c072631f186a424840",
+      "sha256": "632fa5c40337e4ee9cb436b3291ab50daf9497e11a1f28512f1edb050728af3e",
       "source_sha256": "7a88441ec6686817f1fe8e24a5de1c99c20c51a4df579869909956a34b125d20",
-      "publication_change": "current release documentation / attribution / license status"
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "README.md",
-      "sha256": "1dc2f379c3d37433c382f12a463ce43bbe9b37f45c2bf9ee8e591ed819897a79",
+      "sha256": "53e930c55e23ea7be97298f3e81d409c877c844e836d14d026a8a1480bec2305",
       "source_sha256": "125290e434e63f8106acb6e3022f7972607ed148e96a1c1196722a4a769b18b9",
-      "publication_change": "current release documentation / attribution / license status"
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "app/faq_answer.py",
@@ -175,29 +175,33 @@
     },
     {
       "path": "docs/application-form-guide.md",
-      "sha256": "6a7d110e190e075838ab632321a153450736b9c4b5c4f814c3af0d49ce46512d",
-      "source_sha256": "6a7d110e190e075838ab632321a153450736b9c4b5c4f814c3af0d49ce46512d"
+      "sha256": "a562f2cf1ab2eee471027dda8556b98c233b6e7307f8ba1aa3abcfdd95ae6ff3",
+      "source_sha256": "6a7d110e190e075838ab632321a153450736b9c4b5c4f814c3af0d49ce46512d",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/application-version-check-20261006.md",
-      "sha256": "8bef4450dd734a929a707057baf5cf06762136132713fe0b5708d6d18c5c7ab2",
-      "source_sha256": "8bef4450dd734a929a707057baf5cf06762136132713fe0b5708d6d18c5c7ab2"
+      "sha256": "64b269fe19b5eb192c23cb3423a2c7859f189992edb9fd1fdbe70f96c1018e46",
+      "source_sha256": "8bef4450dd734a929a707057baf5cf06762136132713fe0b5708d6d18c5c7ab2",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/career-evidence-report.md",
-      "sha256": "44686d49cd4fe531a7987832e0706244a9b3023afe4404c573a6e8558a037383",
-      "source_sha256": "44686d49cd4fe531a7987832e0706244a9b3023afe4404c573a6e8558a037383"
+      "sha256": "785103b64f3a3f6cf1daee3195a5877b44bf7c9fcb314db44e650241ea00601c",
+      "source_sha256": "44686d49cd4fe531a7987832e0706244a9b3023afe4404c573a6e8558a037383",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/competition-submission.md",
-      "sha256": "23521c82f31933a42b2da6abda6038b1184d005fc7701178206cb1293f48deb7",
+      "sha256": "7f929d9c1b33b9953a151cd2d5619e548f0ace060a8cd5a282a50bb4a30bf877",
       "source_sha256": "4e72b8ccb6c3ba3c1919d64ec627c22119abc6fd316a87668aeeb5235be76b5e",
-      "publication_change": "current release documentation / attribution / license status"
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/compose-acceptance.md",
-      "sha256": "9494075438d8be668367bdeb83ccf2f227c8e1e8088c8107c5731d044d4ce27a",
-      "source_sha256": "9494075438d8be668367bdeb83ccf2f227c8e1e8088c8107c5731d044d4ce27a"
+      "sha256": "681af27c73a9249d08e938ff79a1ce87b06c966402c8f7f0ca9cb30ae16b2ff4",
+      "source_sha256": "9494075438d8be668367bdeb83ccf2f227c8e1e8088c8107c5731d044d4ce27a",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/faq.md",
@@ -206,13 +210,15 @@
     },
     {
       "path": "docs/final-acceptance-20261006.md",
-      "sha256": "9855b51696f8e903a55095528efcb95c4b117a85f6e9119005d9bf0750549b98",
-      "source_sha256": "9855b51696f8e903a55095528efcb95c4b117a85f6e9119005d9bf0750549b98"
+      "sha256": "ef420989c32e02cee4b6235f738744e716806583945e5711df75b42dc277b0a9",
+      "source_sha256": "9855b51696f8e903a55095528efcb95c4b117a85f6e9119005d9bf0750549b98",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/five-minute-demo.md",
-      "sha256": "18c8d393ce60b58817f320eefbdcabf3196c9500f4746908594b793862121dc4",
-      "source_sha256": "18c8d393ce60b58817f320eefbdcabf3196c9500f4746908594b793862121dc4"
+      "sha256": "cc08df22ef9668d26a9003a0736ebc8698813ade5e89f50034153aa98b7b07ce",
+      "source_sha256": "18c8d393ce60b58817f320eefbdcabf3196c9500f4746908594b793862121dc4",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/github-methods-20261007.md",
@@ -221,18 +227,21 @@
     },
     {
       "path": "docs/memory-change-summary.md",
-      "sha256": "0094153750a34f83192b60b042e3409d2e7642d06502d428ce0f8a6a32e024e5",
-      "source_sha256": "0094153750a34f83192b60b042e3409d2e7642d06502d428ce0f8a6a32e024e5"
+      "sha256": "8dbb9e439759c8f40f3a9dfa4196cf083770065a8fe8ca51dec68fb22a46e98f",
+      "source_sha256": "0094153750a34f83192b60b042e3409d2e7642d06502d428ce0f8a6a32e024e5",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/memory-data-operations.md",
-      "sha256": "96f09de70953066bfb43299147eb89ebd4a13e0d9bf729b2cf4a7748e3b2d2f5",
-      "source_sha256": "96f09de70953066bfb43299147eb89ebd4a13e0d9bf729b2cf4a7748e3b2d2f5"
+      "sha256": "c889efa82ec7922a10afd10563f93957047f00e7342689724d8afeee3e8043d3",
+      "source_sha256": "96f09de70953066bfb43299147eb89ebd4a13e0d9bf729b2cf4a7748e3b2d2f5",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/memory-deployment.md",
-      "sha256": "127a03d4a0b90f7f480a596df6d37a4feb78ee761c7f571f19eddb71cbb1f6aa",
-      "source_sha256": "127a03d4a0b90f7f480a596df6d37a4feb78ee761c7f571f19eddb71cbb1f6aa"
+      "sha256": "143c12a3ee9540359ee5989c8d96bd3fef1b70582a29b144a9c04234dc491be4",
+      "source_sha256": "127a03d4a0b90f7f480a596df6d37a4feb78ee761c7f571f19eddb71cbb1f6aa",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/memory-design.md",
@@ -241,13 +250,15 @@
     },
     {
       "path": "docs/memory-evaluation.md",
-      "sha256": "3491b38b2aa86fe5bab0ed9ca50d5c83675105ee55c1b63716d0cfe4c93bca8f",
-      "source_sha256": "3491b38b2aa86fe5bab0ed9ca50d5c83675105ee55c1b63716d0cfe4c93bca8f"
+      "sha256": "0754bcd6dce04d3cb65611de87e7804c4a9650d4bbb178e8dd8abb1cdaecf8ea",
+      "source_sha256": "3491b38b2aa86fe5bab0ed9ca50d5c83675105ee55c1b63716d0cfe4c93bca8f",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/memory-user-inputs.md",
-      "sha256": "f156416348d7e74ecd7e9829a553c5d5af7e469defe104486fd040f2a47466e2",
-      "source_sha256": "f156416348d7e74ecd7e9829a553c5d5af7e469defe104486fd040f2a47466e2"
+      "sha256": "ee4402c32b43987bc665d85e2c8243224c77f4ab2939e6f88ec6275e0f28a5c2",
+      "source_sha256": "f156416348d7e74ecd7e9829a553c5d5af7e469defe104486fd040f2a47466e2",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/model-evaluation-config.example",
@@ -261,18 +272,21 @@
     },
     {
       "path": "docs/organizer-questions.md",
-      "sha256": "34510d47af957019ebca2d177b0f80784ffea6585bdcabd486876076336a0858",
-      "source_sha256": "34510d47af957019ebca2d177b0f80784ffea6585bdcabd486876076336a0858"
+      "sha256": "5e3efea92dd37ca7cdab7eab0c3c457a265f4d5bff0cfa6cf28ca79a82264fc5",
+      "source_sha256": "34510d47af957019ebca2d177b0f80784ffea6585bdcabd486876076336a0858",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/project-review-20261003.md",
-      "sha256": "05f7459a965800024d9bc71fce6ac99e16294f7e02041d9cb823493c89b23496",
-      "source_sha256": "05f7459a965800024d9bc71fce6ac99e16294f7e02041d9cb823493c89b23496"
+      "sha256": "baae191c650ae0d7d249fe1dbda25ed1747d390aa3b721e99481bb8db89767d4",
+      "source_sha256": "05f7459a965800024d9bc71fce6ac99e16294f7e02041d9cb823493c89b23496",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/publication-status.md",
-      "sha256": "310dd008f5ea59741d9c30748ac91931b56dbc8a73f659fe30b8d1f0d5a202d8",
-      "source_sha256": "310dd008f5ea59741d9c30748ac91931b56dbc8a73f659fe30b8d1f0d5a202d8"
+      "sha256": "9a2e2aa36e2a9d59078549edb9f27f0d267d027f8437505be3323f8e5f4f0e30",
+      "source_sha256": "310dd008f5ea59741d9c30748ac91931b56dbc8a73f659fe30b8d1f0d5a202d8",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/remediation-20261007.md",
@@ -281,13 +295,15 @@
     },
     {
       "path": "docs/remediation-round2-20261007.md",
-      "sha256": "bdf4ece14b942b4dd961dd7005586285db86fe3bb331487207015812f9c08b20",
-      "source_sha256": "bdf4ece14b942b4dd961dd7005586285db86fe3bb331487207015812f9c08b20"
+      "sha256": "03faa45e32726f00e7fd67843b418d9f726ec93f9cf045863bf9347379004e79",
+      "source_sha256": "bdf4ece14b942b4dd961dd7005586285db86fe3bb331487207015812f9c08b20",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/remediation-round3-20261007.md",
-      "sha256": "294b8aa86a814f6e0b11585070e1b3fc7b1ea94632eba42612242e6484984bb6",
-      "source_sha256": "294b8aa86a814f6e0b11585070e1b3fc7b1ea94632eba42612242e6484984bb6"
+      "sha256": "a96b4c6a470a081373848d850c5f04ca1f87555de302295d9e6b1bd831e716cf",
+      "source_sha256": "294b8aa86a814f6e0b11585070e1b3fc7b1ea94632eba42612242e6484984bb6",
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/resume-evidence.md",
@@ -757,15 +773,15 @@
     },
     {
       "path": "docs/v6-release-verification.md",
-      "sha256": "d032dbb5228a105fb4b65b09776f0a29d6e7f38e01aa54c170cb8cca44d1755b",
+      "sha256": "ae237c3c4813d2c82fbe7cf2359b163d8a7abde4e9867c9678d3ffe04218277e",
       "source_sha256": null,
-      "publication_change": "new release documentation"
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     },
     {
       "path": "docs/original-work-v6.md",
-      "sha256": "094ba1ddb5f5e786662479acd17cd78279141a9adcfc47a044ffe93b89d7976d",
+      "sha256": "bb86c5984357856f9ca565b485d1ae175feff075b0ca827cc30634ffa45296f9",
       "source_sha256": null,
-      "publication_change": "new release documentation"
+      "publication_change": "first-person prose; removed conversational decisions and employment wording"
     }
   ],
   "sanitized_metadata": [

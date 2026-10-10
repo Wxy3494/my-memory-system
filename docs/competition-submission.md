@@ -1,12 +1,12 @@
 # v6 提交说明：部署与原始工作
 
-整理日期：2026-10-10（Asia/Shanghai）。我的记忆系统，内部名称 TraceMemory；作者署名 Wxy3494；文本记忆服务，MIT。[公开仓库](https://github.com/Wxy3494/my-memory-system)。本说明和源码以其所属 Git commit 为固定公开版本，完整 SHA 和永久链接另外保存在本地冻结记录。
+整理日期：2026-10-10（Asia/Shanghai）。我的项目名称是“我的记忆系统”，内部名称 TraceMemory。我以 Wxy3494 署名，采用 MIT 许可，提供文本记忆服务。[公开仓库](https://github.com/Wxy3494/my-memory-system)。我的提交版本以本说明所属的 Git commit 为准。完整 SHA 和永久链接另存于本地冻结记录。
 
 ## 已部署 API 版本
 
-服务器截图显示容器 tracememory-api-1，镜像 tracememory:v6-local，镜像 ID `sha256:4cca23e3b81ff8177a54cb2b6c3e1205b549a39d5387f3f540fa3b9225353417`。这是服务器本地镜像 ID，不是公开镜像仓库 digest 或 Git commit。本次发布未重新构建或替换服务器镜像。源码与原 v6 包的对照见 source-manifest-v6.json。
+我的部署记录显示，运行容器为 tracememory-api-1，镜像 tracememory:v6-local，镜像 ID `sha256:4cca23e3b81ff8177a54cb2b6c3e1205b549a39d5387f3f540fa3b9225353417`。这是服务器本地镜像 ID，不是公开镜像仓库 digest 或 Git commit。这次源码发布保留了服务器上现有的镜像。源码与原 v6 包的对照见 source-manifest-v6.json。
 
-服务器 /home/admin/my-memory-system 与 /home/admin/my-memory-system-before-v8-20261009-155815 的 app、migrations、环境文件、Compose 与 Dockerfile 比较均一致。截图中运行容器读取的非密钥配置：
+服务器 /home/admin/my-memory-system 与 /home/admin/my-memory-system-before-v8-20261009-155815 的 app、migrations、环境文件、Compose 与 Dockerfile 比较均一致。我的运行容器配置记录如下，不包含密钥：
 
 | 参数 | 已读取值 |
 |---|---|
@@ -31,7 +31,7 @@ evals/memory_candidate_v6.json 的 BM25/上下文参数是实验配置，不作�
 | OpenAPI | GET http://aixuexi.asia/openapi.json |
 | 鉴权 | Authorization: Bearer <Memory System Key>；有效值对应 MEMORY_API_KEY，只填平台专用字段 |
 
-2026-10-10 本机公网检查：health 200/ok、readiness 200/ready、OpenAPI 包含 Add/Search，错误令牌的 Add/Search 均返回 401。使用客户端默认网络路径，只发送无效令牌；没有发送有效密钥或写入评测数据。该记录不代替有效令牌真实 Add/Search 闭环。URL 按实际检查的 HTTP 地址披露，本次没有记录 HTTPS 闭环。
+2026-10-10，我的公网检查记录为：health 200/ok、readiness 200/ready、OpenAPI 包含 Add/Search，错误令牌的 Add/Search 均返回 401。这次检查使用客户端默认网络路径，只发送无效令牌，没有发送有效密钥或写入评测数据。该记录不代替有效令牌真实 Add/Search 闭环。我按实际检查的 HTTP 地址列出 URL，这次没有记录 HTTPS 闭环。
 
 Add 使用 request_id、user_id、session_id、messages，保留 role、content 和可选毫秒 timestamp；事务成功后返回 success=true 和对应标识，相同请求相同载荷幂等，不同载荷冲突。Search 使用 query、user_id、top_k、可选 options，按用户隔离，输出 data 证据数组，含 id/content/score/sources。options 不用于拼造答案；最终 Answer/Judge 在外部评测方执行。
 
@@ -54,6 +54,6 @@ Add 使用 request_id、user_id、session_id、messages，保留 role、content 
 
 ## 原始工作与模型披露
 
-原作者、参考仓库固定版本、论文、技术资料和本项目改动见 [原始工作披露](original-work-v6.md)，AI 辅助情况见 NOTICE.md，依赖许可见 third-party-dependencies.md。
+我参考的工作、原作者、仓库固定版本、论文、技术资料和具体改动见 [原始工作披露](original-work-v6.md)，AI 辅助情况见 NOTICE.md，依赖许可见 third-party-dependencies.md。
 
-实际 Add/Search 使用 text-embedding-v4/1024；服务没有 gpt-4o-mini 事实抽取组件。按实际实现向所选组别披露并遵循对应模型规则，不把源码发布描述成额外执行过模型调用。本 commit 不自动继承历史版本得分。
+实际 Add/Search 使用 text-embedding-v4/1024；服务没有 gpt-4o-mini 事实抽取组件。我按实际实现披露模型使用情况，并遵循所选组别的对应规则。这次源码发布没有额外执行模型调用。本 commit 不自动继承历史版本得分。

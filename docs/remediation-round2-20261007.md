@@ -60,9 +60,9 @@ ASGI TestClient没有真实外网/TCP链路；测试Add使用假向量。上述�
 
 ## 后续环境与版本验收
 
-用户只读检查服务器 `/home/admin/my-memory-system/.env.memory`：Embedding地址和密钥已填写，Answer/Judge地址和密钥未填写。这只证明配置项存在情况，不证明有效性。用户截图显示Ubuntu、2核、1GiB内存、30GiB磁盘；没有在该服务器执行本轮测试、迁移、重启或更新。
+我的服务器配置只读检查记录涉及 `/home/admin/my-memory-system/.env.memory`：Embedding地址和密钥已填写，Answer/Judge地址和密钥未填写。这只证明配置项存在情况，不证明有效性。我的终端截图显示Ubuntu、2核、1GiB内存、30GiB磁盘；没有在该服务器执行本轮测试、迁移、重启或更新。
 
-真实模型阶段需要支持固定模型的Answer地址/密钥（Judge可共用）、隔离 `_memory_test` 数据库、已有Embedding配置、费用货币/上限；密钥应保存在安全配置文件，不能进入聊天、证据或Git。模板为 `docs/model-evaluation-config.example`。当前用户已选择暂缓，因此不继续索要密钥、不执行付费环节。
+真实模型阶段需要支持固定模型的Answer地址/密钥（Judge可共用）、隔离 `_memory_test` 数据库、已有Embedding配置、费用货币/上限；密钥应保存在安全配置文件，不能进入聊天、证据或Git。模板为 `docs/model-evaluation-config.example`。本轮没有执行付费模型评估。
 
 部署阶段仍需要公开冻结commit、依赖及镜像digest一致、生产迁移演练/备份、外网鉴权Add/Search闭环、重启、容量、凭据轮换记录及官方Smoke/Full。HTTP/HTTPS的既有历史记录不能直接证明新候选已验收；具体平台资格以当前官方要求和平台结果为准。
 
@@ -76,6 +76,6 @@ python scripts/verify_memory_isolated.py --docker <本机docker路径> --output-
 
 此命令会创建唯一标签的临时本地pgvector库，运行项目测试、长文与并发检查、74题真实SQL检查，并清理该库；不会调用付费模型。需Docker已启动，现有本地镜像 `pgvector/pgvector:pg17`，输出目录不得覆盖旧记录。
 
-项目结算：本轮新增付费模型请求0，新增API费用0；未购买/扩容云资源。临时测试容器已清理。服务器原有租用费用属于已有资源，不计为本轮新增购买。已实现与本地验证项交付，真实答案、公开发布、服务器上线和官方成绩列待办。
+项目结算：本轮新增付费模型请求0，新增API费用0；临时测试容器已清理。已实现与本地验证项交付，真实答案、公开发布、服务器上线和官方成绩列待办。
 
 最终项目包：`releases/my-memory-system-v3-local-review.zip`；包信息：同名 `.json`；候选清单：`docs/evidence/20261007-round2/candidate-manifest.json`。它们核验本地内容，不代表公开Git提交或官方接收。原06/07/08文件及旧证据均保留。

@@ -14,9 +14,9 @@
 
 此次未提交申请、未发送邮件、未改变线上服务或鉴权。
 
-## 23:31 用户提供的线上输出
+## 23:31 我的线上输出记录
 
-用户终端截图显示源码指纹为 `28fb15d80bc37953830501f3e0c522d2d82058709db9e6944f84d9a3455e0116`，与公开 commit 的上述 13 个文件聚合指纹完全一致。此证据覆盖记忆 API Python 代码，不覆盖全部依赖、数据库迁移或部署配置。
+我的终端截图显示源码指纹为 `28fb15d80bc37953830501f3e0c522d2d82058709db9e6944f84d9a3455e0116`，与公开 commit 的上述 13 个文件聚合指纹完全一致。此证据覆盖记忆 API Python 代码，不覆盖全部依赖、数据库迁移或部署配置。
 
 配置输出：model=text-embedding-v4，dimension=1024，pipeline_version=v0，retrieval=vector，chunk_target=400，chunk_overlap=60。申请版本可写 v1.0，但说明其内部 pipeline_version 为 v0，并绑定上述固定 commit。
 
