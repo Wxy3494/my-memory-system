@@ -12,7 +12,7 @@ RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels \
 COPY app/ ./app/
 COPY migrations/ ./migrations/
 COPY scripts/ ./scripts/
-COPY evals/memory_eval.py evals/memory_load.py ./evals/
+COPY evals/memory_eval.py evals/memory_load.py evals/memory_answer_eval.py evals/calibrate_memory_gate.py evals/memory_live_ablation.py ./evals/
 USER memory
 EXPOSE 8000
 CMD ["python", "-m", "uvicorn", "app.memory_main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

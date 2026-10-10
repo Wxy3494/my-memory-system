@@ -38,7 +38,9 @@ class EvidenceScoring(unittest.TestCase):
         self.case["acceptable_evidence_groups"] = []
         result = score_case(self.case, self.data(), "", 100)
         self.assertIsNone(result["recall"])
-        self.assertEqual(result["unrelated_count"], 1)
+        self.assertIsNone(result["unrelated_count"])
+        self.assertEqual(result["fact_absent_return_count"], 1)
+        self.assertEqual(result["unjudged_return_count"], 1)
 
     def test_fabricated_header_is_rejected(self):
         data = self.data()

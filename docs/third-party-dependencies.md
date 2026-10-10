@@ -30,4 +30,4 @@
 
 完整项目链接、wheel 哈希和许可文件名保存在 `evidence/20261006-memory-local-closeout/dependency-metadata.json`。本地源码包不打包第三方 wheel；Linux 镜像安装的依赖保留各发行包附带的许可。Python、Debian、PostgreSQL/pgvector、Caddy 镜像的系统组件另外适用各自许可，本表不覆盖它们。
 
-整体项目开源许可尚未选择。元数据整理不构成已经完成全部来源或许可审查的声明。
+整体项目使用 MIT 许可，版权署名 Wxy3494，见根目录 LICENSE。第三方组件分别适用原许可。元数据整理不构成已经完成全部来源或许可审查的声明。

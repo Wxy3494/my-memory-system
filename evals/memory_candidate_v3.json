@@ -1,0 +1,15 @@
+{
+  "candidate": "v3-bm25-window2-budget32k",
+  "state": "local_evaluation_candidate_not_deployed",
+  "selected_from": "docs/evidence/20261007-round2/dev-selected/ablation-summary.json",
+  "rationale": "DEV complete evidence at 100 reaches 1.0 with bounded expansion; two-message radius covers three-message rules.",
+  "MEMORY_RETRIEVAL_MODE": "bm25",
+  "MEMORY_NEIGHBOR_WINDOW": 2,
+  "MEMORY_SEED_LIMIT": 20,
+  "MEMORY_EVIDENCE_BYTES": 32768,
+  "MEMORY_MIN_SIMILARITY": null,
+  "expansion": "reserve all seeds that fit; at most four additions per seed and two per message per seed; interleave; SQL fetch at most four chunks per target message",
+  "expanded_score": "1-based reciprocal output rank, not cosine or raw BM25",
+  "remaining_gates": ["real embedding and fixed Answer/Judge", "cloud capacity", "publish and deploy identical version", "official evaluation"],
+  "holdout_disclosure": "locally authored nonblind; first window1 run had already included holdout before DEV window2 selection"
+}

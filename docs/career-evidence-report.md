@@ -71,7 +71,7 @@ P50/P95 用 nearest-rank，排序后取 `ceil(n × p)` 位；n=20 时 P95 是第
 已按 README 配置、构建镜像并入库后，在项目根目录 PowerShell 执行。需要现有 DeepSeek 账号额度，重跑将发出真实生成请求。不要发送或提交 Key。
 
 ```powershell
-& 'docker.exe' compose --profile monitoring up -d --no-build --wait --wait-timeout 60
+& 'C:\Users\wxy34\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe' compose --profile monitoring up -d --no-build --wait --wait-timeout 60
 ./evals/career_run.ps1 -RunName career-rerun-01
 python ./evals/career_report.py ./docs/evidence/career-rerun-01
 python ./evals/verify_career.py ./docs/evidence/career-rerun-01

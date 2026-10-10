@@ -32,7 +32,12 @@ class ConfigurationTests(unittest.TestCase):
             client = TestClient(app)
             self.assertEqual(client.get("/ready/memory").status_code, 200)
             with patch("app.memory.embeddings.time.monotonic", return_value=10**15):
-                self.assertEqual(client.get("/ready/memory").status_code, 503)
+                expired=client.get("/ready/memory")
+                self.assertEqual(expired.status_code, 503)
+                self.assertEqual(expired.json()["readiness_reason"],"probe_missing_or_expired")
+                self.assertTrue(expired.json()["configuration_database_ready"])
+            record_probe(config,False)
+            self.assertEqual(client.get("/ready/memory").json()["readiness_reason"],"dependency_failure")
             paid.assert_not_called()
             check.assert_called()
 

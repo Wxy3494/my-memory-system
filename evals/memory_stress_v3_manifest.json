@@ -1,0 +1,46 @@
+{
+  "version": "stress-v3",
+  "holdout_policy": "Authored nonblind local holdout; no tuning on holdout; freeze before runs",
+  "datasets": {
+    "memory_stress_v3_dev.jsonl": {
+      "sha256": "aa51b0f7907cad2326f6818ed426c741f944bdb03358d3ac14ec916d5a05bd18",
+      "questions": 21,
+      "independent_scenarios": 21,
+      "capabilities": {
+        "A": 3,
+        "B": 3,
+        "C": 3,
+        "D": 3,
+        "E": 3,
+        "G": 3,
+        "H": 3
+      },
+      "answer_statuses": {
+        "answer": 16,
+        "unknown": 4,
+        "restricted": 1
+      },
+      "distractors_per_user": 240
+    },
+    "memory_stress_v3_holdout.jsonl": {
+      "sha256": "96e807e0015271b684cbe2f6d6c827b4e87cf0bb7805d0f8bbb1bf7cb114042e",
+      "questions": 21,
+      "independent_scenarios": 21,
+      "capabilities": {
+        "A": 3,
+        "B": 3,
+        "C": 3,
+        "D": 3,
+        "E": 3,
+        "G": 3,
+        "H": 3
+      },
+      "answer_statuses": {
+        "answer": 16,
+        "unknown": 4,
+        "restricted": 1
+      },
+      "distractors_per_user": 600
+    }
+  }
+}

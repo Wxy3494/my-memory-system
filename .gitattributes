@@ -1,3 +1,0 @@
-# Preserve exact file bytes so evidence hashes survive cross-platform checkout.
-# Git diff still detects text normally; this only disables newline conversion.
-* -text

@@ -9,9 +9,11 @@ import subprocess
 import sys
 import time
 import uuid
+from datetime import datetime, timedelta, timezone
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.memory.chunking import stable_id
+from app.memory.schemas import AddRequest, SearchRequest
 
 
 def load_cases(paths):
@@ -25,17 +27,25 @@ def load_cases(paths):
             if case["case_id"] in ids:
                 raise ValueError("duplicate case_id")
             ids.add(case["case_id"])
+            SearchRequest(**case["search"])
             for write in case["writes"]:
+                AddRequest(**write)
                 owner = owners.setdefault(write["user_id"], str(path))
                 if owner != str(path):
                     raise ValueError("user shared across dataset splits")
             messages = {(w["request_id"], i): m for w in case["writes"]
                         if w["user_id"] == case["search"]["user_id"] for i, m in enumerate(w["messages"])}
-            for group in case["acceptable_evidence_groups"]:
+            annotation_groups = [refs for refs in case.get("evidence_annotations", {}).values() if refs]
+            for group in [*case["acceptable_evidence_groups"], *annotation_groups]:
+                if not group:
+                    raise ValueError("empty evidence group")
                 for ref in group:
                     message = messages[(ref["request_id"], ref["ordinal"])]
                     if ref.get("quote") and ref["quote"] not in message["content"]:
                         raise ValueError("expected quote absent from source")
+            if "answer_contract" in case:
+                from evals.memory_answer_eval import validate_contract
+                validate_contract(case)
             cases.append(case)
     return cases
 
@@ -49,13 +59,18 @@ def percentile(values, fraction):
 
 def score_case(case, data, namespace, k):
     corpus = {}
+    positions, receipts = {}, {}
     for w in case["writes"]:
         if w["user_id"] == case["search"]["user_id"]:
+            receipt = (w["user_id"], w["request_id"])
+            session = (w["user_id"], w["session_id"])
+            first = receipts.setdefault(receipt, positions.get(session, 0))
+            positions[session] = max(positions.get(session, 0), first+len(w["messages"]))
             for i, message in enumerate(w["messages"]):
                 key = stable_id("message", namespace + w["user_id"], namespace + w["request_id"], i)
-                corpus[key] = (w, i, message)
+                corpus[key] = (w, i, message, first+i)
     found, leaks, audit_errors = [], 0, 0
-    for row in data[:k]:
+    for result_rank, row in enumerate(data[:k], 1):
         sources = row.get("sources")
         content = row.get("content")
         if not isinstance(sources, list) or not sources or not isinstance(content, str):
@@ -77,12 +92,26 @@ def score_case(case, data, namespace, k):
                 leaks += 1
                 valid = False
                 continue
-            write, ordinal, message = original
+            write, ordinal, message, received = original
             start, end = source.get("start_offset"), source.get("end_offset")
             expected = dict(message_id=source["message_id"], session_id=namespace + write["session_id"],
                             request_id=namespace + write["request_id"], ordinal=ordinal,
                             role=message["role"], timestamp=message.get("timestamp"),
                             start_offset=start, end_offset=end)
+            extended = ("received_ordinal", "stored_at", "order_basis")
+            if any(source.get(key) is not None for key in extended):
+                try:
+                    stored_at = datetime.fromisoformat(source["stored_at"])
+                    if (stored_at.tzinfo is None or type(source["received_ordinal"]) is not int
+                            or source["received_ordinal"] < 0
+                            or source["order_basis"] not in ("received", "legacy_ingest_reconstructed")
+                            or (source["order_basis"] == "received" and source["received_ordinal"] != received)):
+                        valid = False
+                except (ValueError, TypeError, KeyError):
+                    valid = False
+                expected.update({key: source.get(key) for key in extended})
+            else:
+                expected.update({key: None for key in extended if key in source})
             if (set(source) != set(expected) or source != expected
                     or type(source.get("ordinal")) is not int
                     or (source.get("timestamp") is not None and type(source["timestamp"]) is not int)
@@ -94,25 +123,53 @@ def score_case(case, data, namespace, k):
             expected_labels.append(dict(role=message["role"], timestamp_ms=message.get("timestamp"),
                                         session_id=namespace + write["session_id"], ordinal=ordinal,
                                         start_offset=start, end_offset=end))
+            if isinstance(labels,list) and len(labels)>len(expected_labels)-1 and isinstance(labels[len(expected_labels)-1],dict) and "time_metadata_version" in labels[len(expected_labels)-1]:
+                from app.memory.signals import utc_anchor
+                expected_labels[-1].update(message_time_utc=utc_anchor(message.get("timestamp")),time_metadata_version="utc-anchor-v1")
+            if source.get("received_ordinal") is not None:
+                expected_labels[-1].update(request_id=namespace+write["request_id"],
+                    received_ordinal=source["received_ordinal"], stored_at=source["stored_at"],
+                    order_basis=source["order_basis"],
+                    time_semantics="timestamp_ms=message_time; stored_at=ingestion_time; event_time=raw_text")
             candidates.append((write["request_id"], ordinal, raw))
         # Compare the complete canonical header too: no discarded or unassociated text.
         expected_header = "[source " + json.dumps(expected_labels, ensure_ascii=False, separators=(",", ":")) + "]"
         if not valid or labels != expected_labels or header != expected_header:
             audit_errors += 1
             continue
-        found.extend(candidates)
+        found.extend((r,o,text,result_rank) for r,o,text in candidates)
     groups = case["acceptable_evidence_groups"]
+    annotations = case.get("evidence_annotations", {})
+    def annotated_positions(kind):
+        return {position for r,o,text,position in found if any(
+            r == ref["request_id"] and o == ref["ordinal"] and
+            (not ref.get("quote") or ref["quote"] in text) for ref in annotations.get(kind, []))}
+    support = annotated_positions("unknown_support")
+    irrelevant = annotated_positions("irrelevant") - support
+    valid_positions = {position for *_,position in found}
+    diagnostics = dict(fact_absent_return_count=len(data[:k]) if not groups else 0,
+        unknown_support_count=len(support), explicit_irrelevant_count=len(irrelevant),
+        unjudged_return_count=len(valid_positions - support - irrelevant) if not groups else 0,
+        declared_sensitive_content_count=sum(any(secret in row.get("content", "").partition("\n")[2]
+            for secret in case.get("answer_contract", {}).get("forbidden_disclosures", []))
+            for position,row in enumerate(data[:k],1) if position in valid_positions),
+        annotation_policy="Source-audited literal gold labels; unlabelled returns are unjudged, not inferred irrelevant; sensitive raw evidence is not a generated-answer violation.")
     if not groups:
         return dict(recall=None, complete=None, leakage_count=leaks, audit_errors=audit_errors,
-                    unrelated_count=len(data[:k]))
+                    unrelated_count=len(irrelevant) if "irrelevant" in annotations else None,
+                    reciprocal_rank=None, **diagnostics)
     recalls = []
     for group in groups:
         covered = sum(any(r == ref["request_id"] and o == ref["ordinal"] and
-                          (not ref.get("quote") or ref["quote"] in text) for r, o, text in found) for ref in group)
+                          (not ref.get("quote") or ref["quote"] in text) for r, o, text, _ in found) for ref in group)
         recalls.append(covered / len(group))
     best = max(recalls)
+    first_rank = next((position for r, o, text, position in found if any(
+        r == ref["request_id"] and o == ref["ordinal"] and
+        (not ref.get("quote") or ref["quote"] in text) for group in groups for ref in group)), None)
     return dict(recall=best, complete=best == 1, leakage_count=leaks,
-                audit_errors=audit_errors, unrelated_count=None)
+                audit_errors=audit_errors, unrelated_count=None,
+                reciprocal_rank=1/first_rank if first_rank else 0, **diagnostics)
 
 
 def http_run(args, cases):
@@ -163,9 +220,13 @@ def http_run(args, cases):
         summary[f"recall@{k}"] = sum(values) / len(values) if values else None
         summary[f"recall_denominator@{k}"] = len(values)
         summary[f"complete_coverage@{k}"] = sum(v == 1 for v in values) / len(values) if values else None
+        ranks = [m["reciprocal_rank"] for m in measurements if m["reciprocal_rank"] is not None]
+        summary[f"mrr@{k}"] = sum(ranks)/len(ranks) if ranks else None
         summary[f"leakage_count@{k}"] = sum(m["leakage_count"] for m in measurements)
         summary[f"audit_errors@{k}"] = sum(m["audit_errors"] for m in measurements)
-        summary[f"no_answer_unrelated_count@{k}"] = sum(m["unrelated_count"] or 0 for m in measurements)
+        for metric in ("fact_absent_return_count", "unknown_support_count", "explicit_irrelevant_count",
+                       "unjudged_return_count", "declared_sensitive_content_count"):
+            summary[f"{metric}@{k}"] = sum(m[metric] for m in measurements)
     return summary, results
 
 
@@ -175,7 +236,7 @@ def main():
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--namespace")
-    parser.add_argument("--output", default="evals/results/memory-run.json")
+    parser.add_argument("--output")
     parser.add_argument("--label", default="v0-vector")
     args = parser.parse_args()
     try:
@@ -190,8 +251,10 @@ def main():
         sources += [root / "app/memory_main.py", root / "app/observability.py", Path(__file__).resolve()]
         source_hashes = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
         config = {k: os.getenv(k) for k in ("MEMORY_EMBEDDING_MODEL", "MEMORY_EMBEDDING_DIM", "MEMORY_PIPELINE_VERSION",
-                   "MEMORY_CHUNK_TARGET_TOKENS", "MEMORY_CHUNK_OVERLAP_TOKENS", "MEMORY_RETRIEVAL_MODE")}
-        output = Path(args.output)
+                   "MEMORY_CHUNK_TARGET_TOKENS", "MEMORY_CHUNK_OVERLAP_TOKENS", "MEMORY_RETRIEVAL_MODE",
+                   "MEMORY_CHUNK_TARGET_BYTES", "MEMORY_CHUNK_OVERLAP_BYTES",
+                   "MEMORY_NEIGHBOR_WINDOW", "MEMORY_SEED_LIMIT", "MEMORY_EVIDENCE_BYTES", "MEMORY_MIN_SIMILARITY")}
+        output = Path(args.output or f"evals/results/memory-run-{datetime.now(timezone(timedelta(hours=8))):%Y%m%d-%H%M%S}.json")
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(dict(label=args.label, source_hashes=source_hashes, config=config,
                                          dataset_hashes=hashes, summary=summary, cases=results), ensure_ascii=False, indent=2), encoding="utf-8")

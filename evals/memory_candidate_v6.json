@@ -1,0 +1,17 @@
+{
+  "candidate": "v6-source-scoped-time-local",
+  "state": "local_candidate_not_production_or_officially_retested",
+  "MEMORY_RETRIEVAL_MODE": "bm25",
+  "MEMORY_NEIGHBOR_WINDOW": 2,
+  "MEMORY_SEED_LIMIT": 20,
+  "MEMORY_EVIDENCE_BYTES": 32768,
+  "MEMORY_MIN_SIMILARITY": null,
+  "MEMORY_CONTEXTUAL_RETRIEVAL": true,
+  "MEMORY_CONTEXT_LIMIT": 24,
+  "MEMORY_LINK_HOPS": 2,
+  "MEMORY_SIGNAL_SCAN_LIMIT": 5000,
+  "required_schema_version": 3,
+  "signal_parser_version": "source-lexical-signals-v2",
+  "interpretation": "Conservative source-event date association; ambiguous/relative/plan/control state is not resolved. Current subject ranking and topic-period buckets use scoped dates. Original chunks only.",
+  "cost_limits": "5000 recent signal records; 24 parents; 2 closure rounds; bounded lexical samples and 96 event scopes per message. Direct top5 preserved; parent text scans remain linear."
+}

@@ -6,6 +6,10 @@ from pathlib import Path
 import re
 import subprocess
 import zipfile
+import sys
+
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from scripts.memory_private_paths import is_private_path, require_private_git_clear
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = 'docs/evidence/20261006-memory-local-closeout/source-manifest.json'
@@ -17,6 +21,8 @@ def candidates():
     paths = []
     for name in names:
         path = ROOT / name
+        if is_private_path(name):
+            continue
         if name == MANIFEST:
             continue
         if (path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(ROOT)
@@ -59,13 +65,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--archive', action='store_true')
     args = parser.parse_args()
+    private_git=require_private_git_clear(ROOT)
     paths = candidates()
     security = scan(paths)
     files = {name: dict(sha256=hashlib.sha256(path.read_bytes()).hexdigest(), bytes=path.stat().st_size)
              for name, path in paths}
     report = dict(system='我的记忆系统', internal_name='TraceMemory', candidate='v0-vector-local',
                   purpose='Local review snapshot, not a published or accepted competition version',
-                  manifest_self_excluded=True, security=security, files=files)
+                  manifest_self_excluded=True, security=security, private_git=private_git, files=files)
     target = ROOT / MANIFEST
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')

@@ -1,0 +1,17 @@
+{
+  "candidate": "v4-parent-message-context",
+  "state": "local_evaluation_candidate_not_deployed",
+  "MEMORY_RETRIEVAL_MODE": "bm25",
+  "MEMORY_NEIGHBOR_WINDOW": 2,
+  "MEMORY_SEED_LIMIT": 20,
+  "MEMORY_EVIDENCE_BYTES": 32768,
+  "MEMORY_MIN_SIMILARITY": null,
+  "parent_candidate_limit": 8,
+  "per_seed_additions": 8,
+  "per_message_per_seed_additions": 6,
+  "policy": "Child-to-parent message lookup; query and lexical novelty plus head/middle/tail; one parent scanned at a time; seeds reserved before additions.",
+  "cost": "Linear scan of target-message text chunks; no query model for pure BM25. Candidate/output limits do not imply constant scan cost.",
+  "tie_policy": "Source session/request/ordinal/offset/content hash, independent of common namespace prefix; vector SQL retains chunk id only after same content tie.",
+  "limits": "No semantic guarantee for arbitrary interior facts with no distinguishing lexical features; not blind holdout, real model or official evaluation.",
+  "references": "docs/evidence/20261007-round3/github-methods.json"
+}

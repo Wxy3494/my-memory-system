@@ -1,7 +1,7 @@
 param([string]$OutputName = ('stage5-' + (Get-Date -Format 'yyyyMMdd-HHmmss')))
 $ErrorActionPreference = 'Stop'
 if ($OutputName -notmatch '^[A-Za-z0-9_-]+$') { throw 'OutputName 只能包含字母、数字、下划线和连字符' }
-$docker = 'docker.exe'
+$docker = 'C:\Users\wxy34\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe'
 Push-Location (Split-Path -Parent $PSScriptRoot)
 try {
     $output = Join-Path 'docs/evaluation' ($OutputName + '.json')

@@ -14,3 +14,6 @@ __pycache__/
 evals/results/
 deploy/wheelhouse/*.whl
 releases/
+.private-eval/
+private-evaluations/
+platform-private/

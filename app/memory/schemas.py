@@ -90,6 +90,9 @@ class Source(StrictModel):
     timestamp: int | None
     start_offset: int
     end_offset: int
+    received_ordinal: int | None = Field(default=None, ge=0)
+    stored_at: str | None = None
+    order_basis: Literal["received", "legacy_ingest_reconstructed"] | None = None
 
 
 class Evidence(StrictModel):

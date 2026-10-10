@@ -31,6 +31,16 @@ def get_service():
         raise HTTPException(exc.status, exc.code) from None
 
 
+@router.get("/v1/memories/version",dependencies=[Depends(authorize)])
+def memory_version(service=Depends(get_service)):
+    from .runtime import runtime_report
+    try:
+        service.store.check()
+        return runtime_report(service.config)
+    except MemoryError as exc:
+        raise HTTPException(exc.status,exc.code) from None
+
+
 @router.post("/v1/memories/add", response_model=AddResponse, dependencies=[Depends(authorize)])
 def add_memory(request: AddRequest, service=Depends(get_service)):
     try:
@@ -59,5 +69,9 @@ def ready_memory():
     except MemoryError as exc:
         checks["dependency"] = exc.code
     ready = checks.get("embedding") == "ok" and "dependency" not in checks
-    return JSONResponse({"status": "ready" if ready else "not_ready", "checks": checks},
+    reason = "ok" if ready else ("probe_missing_or_expired" if checks.get("embedding") == "not_probed_or_expired"
+                                  else "dependency_failure")
+    return JSONResponse({"status": "ready" if ready else "not_ready", "checks": checks,
+                         "readiness_reason": reason,
+                         "configuration_database_ready": checks.get("database_and_migration") == "ok"},
                         status_code=200 if ready else 503)

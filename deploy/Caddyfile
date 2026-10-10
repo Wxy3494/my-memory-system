@@ -1,5 +1,5 @@
 {$MEMORY_PUBLIC_HOST:localhost} {
-    @public path /health /ready/memory /v1/memories/add /v1/memories/search
+    @public path /health /ready/memory /v1/memories/add /v1/memories/search /v1/memories/version
     handle @public {
         reverse_proxy api:8000
     }

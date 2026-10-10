@@ -1,0 +1,35 @@
+{
+  "version": "seven-capabilities-v2",
+  "datasets": {
+    "memory_challenge_v2_dev.jsonl": {
+      "sha256": "40074fcd05a4e430697d78aa0fb0298a6094ccc08d3524a59a3d501b4c970172",
+      "cases": 16,
+      "same_user_distractor_messages": 300,
+      "capabilities": {
+        "A": 1,
+        "B": 2,
+        "C": 3,
+        "D": 4,
+        "E": 2,
+        "G": 2,
+        "H": 2
+      }
+    },
+    "memory_challenge_v2_holdout.jsonl": {
+      "sha256": "7169e66bc19b48f306c1cab7a09b6b8fca6579010344af8cc0c233470a895788",
+      "cases": 16,
+      "same_user_distractor_messages": 1000,
+      "capabilities": {
+        "A": 1,
+        "B": 2,
+        "C": 3,
+        "D": 4,
+        "E": 2,
+        "G": 2,
+        "H": 2
+      }
+    }
+  },
+  "provenance": "Independent locally authored synthetic scenarios",
+  "holdout_policy": "Freeze file SHA-256 before model experiments; tune DEV only. Local authored holdout is not blind official data."
+}

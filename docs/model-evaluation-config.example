@@ -1,0 +1,17 @@
+# Only a template. Store filled secrets in a separate ignored .env.memory-eval.
+# Test database must be isolated; never copy the production DATABASE_URL here.
+MEMORY_TEST_DATABASE_URL=
+MEMORY_API_KEY=
+MEMORY_EMBEDDING_BASE_URL=
+MEMORY_EMBEDDING_API_KEY=
+MEMORY_EMBEDDING_MODEL=text-embedding-v4
+MEMORY_EMBEDDING_DIM=1024
+MEMORY_ANSWER_BASE_URL=
+MEMORY_ANSWER_API_KEY=
+MEMORY_ANSWER_MODEL=gpt-4o-mini
+# Judge may reuse Answer URL/key by leaving these two blank.
+MEMORY_JUDGE_BASE_URL=
+MEMORY_JUDGE_API_KEY=
+MEMORY_JUDGE_MODEL=gpt-4o-mini
+# Agree money/currency with the user and set provider spending cap before --live.
+# --max-model-calls bounds requests, not currency. No automatic paid execution.

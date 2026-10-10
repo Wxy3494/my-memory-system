@@ -1,6 +1,0 @@
-{
-  "polled_without_restart": true,
-  "interval_seconds": 30,
-  "description": "Local simulated customer-service RAG: /ask and /v1/retrieve. Retrieval metrics exclude generation.",
-  "panels": 15
-}

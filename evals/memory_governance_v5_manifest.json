@@ -1,0 +1,37 @@
+{
+  "version": "post-smoke-v5",
+  "provenance": "independent_local_synthetic_no_private_Smoke_items",
+  "holdout_policy": "Authored nonblind; freeze before retrieval experiments; I2 local transfer hypothesis is not production definition",
+  "datasets": {
+    "memory_governance_v5_dev.jsonl": {
+      "sha256": "1fcc4c09920c967218f0775faba9a8f19ba13d0be207cf19ae77b4fad95ff8c9",
+      "nodes": 22,
+      "scenarios": 19,
+      "capabilities": {
+        "D": 5,
+        "B": 3,
+        "C": 4,
+        "G": 2,
+        "H": 1,
+        "A": 1,
+        "E": 1,
+        "I": 5
+      }
+    },
+    "memory_governance_v5_holdout.jsonl": {
+      "sha256": "6e13ddf99e656a6a3089884676cc5ee19372aa575770faeed55458e631733488",
+      "nodes": 22,
+      "scenarios": 19,
+      "capabilities": {
+        "D": 5,
+        "B": 3,
+        "C": 4,
+        "G": 2,
+        "H": 1,
+        "A": 1,
+        "E": 1,
+        "I": 5
+      }
+    }
+  }
+}

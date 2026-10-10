@@ -1,5 +1,6 @@
 """Live synthetic HTTP checks (paid embedding calls). Does not run platform Smoke."""
 import argparse
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -72,7 +73,8 @@ def main():
             readiness = client.get("/ready/memory")
             assert readiness.status_code == 200
             checks.append("api_process_recent_embedding_readiness")
-        report = dict(status="passed", check_existing=bool(args.check_existing), users=[user, other],
+        report = dict(status="passed", checked_at_utc=datetime.now(timezone.utc).isoformat(),
+                      base_url=args.base_url, check_existing=bool(args.check_existing), users=[user, other],
                       checks=checks, result_count=len(data), local_synthetic=True,
                       platform_smoke="not_performed", database_duplicate_count="not_measured_by_http")
         output = Path(args.output)
@@ -81,7 +83,16 @@ def main():
         print(json.dumps(report, ensure_ascii=False))
         return 0
     except Exception as exc:
-        print(json.dumps(dict(status="failed", completed_checks=checks, error_type=type(exc).__name__)))
+        # Keep failed acceptance evidence, without exception strings, request headers, or response bodies.
+        report = dict(status="failed", checked_at_utc=datetime.now(timezone.utc).isoformat(),
+                      base_url=args.base_url, completed_checks=checks, error_type=type(exc).__name__,
+                      platform_smoke="not_performed")
+        if isinstance(exc, httpx.HTTPStatusError):
+            report["http_status"] = exc.response.status_code
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(json.dumps(report, ensure_ascii=False))
         return 1
 
 

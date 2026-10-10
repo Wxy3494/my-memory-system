@@ -1,0 +1,16 @@
+{
+  "candidate": "v5-source-contextual-local",
+  "state": "local_candidate_not_production_or_officially_retested",
+  "MEMORY_RETRIEVAL_MODE": "bm25",
+  "MEMORY_NEIGHBOR_WINDOW": 2,
+  "MEMORY_SEED_LIMIT": 20,
+  "MEMORY_EVIDENCE_BYTES": 32768,
+  "MEMORY_MIN_SIMILARITY": null,
+  "MEMORY_CONTEXTUAL_RETRIEVAL": true,
+  "MEMORY_CONTEXT_LIMIT": 24,
+  "MEMORY_LINK_HOPS": 2,
+  "MEMORY_SIGNAL_SCAN_LIMIT": 5000,
+  "required_schema_version": 3,
+  "interpretation": "Source-linked heuristic state/time/relationship/rule/global coverage hints; return raw chunks only; no authoritative fact resolution or answer generation",
+  "cost_limits": "At most 5000 recent signal records, 24 context parents, 2 closure rounds; preserve direct top5; per-parent text scan remains linear. Truncation is diagnosed."
+}

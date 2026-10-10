@@ -9,6 +9,7 @@ import platform
 import os
 import sys
 import unittest
+from datetime import datetime, timedelta, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -17,7 +18,8 @@ sys.path.insert(0, str(ROOT / "evals"))
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="docs/evidence/20261006-memory/verification.json")
+    started = datetime.now(timezone(timedelta(hours=8)))
+    parser.add_argument("--output", default=f"docs/evidence/{started:%Y%m%d-%H%M%S}-verification/verification.json")
     args = parser.parse_args()
     files = list((ROOT / "app/memory").glob("*.py"))
     files += [ROOT / "app/memory_main.py", ROOT / "app/main.py", ROOT / "app/observability.py"]
@@ -28,7 +30,8 @@ def main():
     sql_check, yaml_check = "not_installed", "not_installed"
     try:
         from pglast import parse_sql
-        parse_sql((ROOT / "migrations/001_memory.sql").read_text(encoding="utf-8"))
+        for migration in sorted((ROOT / "migrations").glob("*.sql")):
+            parse_sql(migration.read_text(encoding="utf-8"))
         # Parse parameterized application SQL as PostgreSQL statements too.
         count = 0
         for path in [ROOT / "app/memory/store.py", ROOT / "scripts/memory_admin.py"]:
@@ -58,9 +61,11 @@ def main():
     output = ROOT / args.output
     output.parent.mkdir(parents=True, exist_ok=True)
     (output.parent / "unit-tests.txt").write_text(stream.getvalue(), encoding="utf-8")
-    manifest_files = files + [ROOT / "migrations/001_memory.sql", ROOT / "compose.memory.yaml", ROOT / "Dockerfile.memory",
+    manifest_files = files + list((ROOT / "migrations").glob("*.sql")) + [ROOT / "compose.memory.yaml", ROOT / "Dockerfile.memory",
                              ROOT / "requirements-memory.txt", ROOT / "requirements.txt"]
-    report = dict(python=platform.python_version(), date="2026-10-06", tests_run=result.testsRun,
+    report = dict(python=platform.python_version(), date=started.date().isoformat(),
+                  started_at=started.isoformat(), completed_at=datetime.now(timezone(timedelta(hours=8))).isoformat(),
+                  timezone="Asia/Shanghai", tests_run=result.testsRun,
                   passed=result.testsRun-len(result.skipped)-len(result.failures)-len(result.errors),
                   skipped=[dict(test=str(test), reason=reason) for test, reason in result.skipped],
                   failures=len(result.failures), errors=len(result.errors), success=result.wasSuccessful(),

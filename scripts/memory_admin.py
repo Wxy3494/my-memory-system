@@ -6,6 +6,8 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import psycopg
+from psycopg.types.json import Jsonb
+from app.memory.signals import extract, VERSION
 from app.memory.config import MemoryConfig
 from app.memory.embeddings import Embeddings
 from app.memory.errors import MemoryError
@@ -20,8 +22,24 @@ def migrate(config):
         conn.execute("INSERT INTO memory.schema_version(singleton,version,pipeline_signature) VALUES(true,1,%s) ON CONFLICT DO NOTHING",
                      (config.signature,))
         row = conn.execute("SELECT version,pipeline_signature FROM memory.schema_version WHERE singleton").fetchone()
-        if row != (1, config.signature):
+        if not row or row[0] not in (1, 2, 3) or row[1] != config.signature:
             raise MemoryError("memory_migration_or_pipeline_mismatch")
+        conn.execute((Path(__file__).resolve().parents[1] / "migrations/002_memory_order.sql").read_text(encoding="utf-8"))
+        conn.execute((Path(__file__).resolve().parents[1] / "migrations/003_memory_neighbor_index.sql").read_text(encoding="utf-8"))
+        conn.execute((Path(__file__).resolve().parents[1] / "migrations/004_memory_signals.sql").read_text(encoding="utf-8"))
+        with conn.cursor(name="memory_signal_backfill") as cursor:
+            cursor.execute("""SELECT m.user_id,m.message_id,m.content,m.role,m.source_timestamp_ms
+                FROM memory.messages m LEFT JOIN memory.message_signals s
+                ON s.user_id=m.user_id AND s.message_id=m.message_id
+                WHERE s.message_id IS NULL OR s.parser_version<>%s
+                OR coalesce(s.features->>'version','')<>%s
+                OR coalesce(s.features->>'source_sha256','')<>encode(sha256(convert_to(m.content,'UTF8')),'hex')""",
+                (VERSION,VERSION))
+            for user,mid,text,role,timestamp in cursor:
+                conn.execute("""INSERT INTO memory.message_signals(user_id,message_id,parser_version,features)
+                    VALUES(%s,%s,%s,%s) ON CONFLICT(user_id,message_id)
+                    DO UPDATE SET parser_version=excluded.parser_version,features=excluded.features""",
+                    (user,mid,VERSION,Jsonb(extract(text,role,timestamp))))
 
 
 def main():

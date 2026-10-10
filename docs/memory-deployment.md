@@ -1,6 +1,18 @@
 # 部署与真实验收
 
+2026-10-08 当前v6保持schema3，派生解析版本改为source-lexical-signals-v2；上线前须显式执行原文关联索引回填，不能只换镜像后沿用v1时间提示。版本路由会报告signal_parser_version。旧v4/schema2及v5/v1恢复都需确认源码/索引/备份一致性，关contextual不足以证明恢复。新源码、镜像和配置尚未上服务器。先按 [只读方式](runtime-readonly-check.md)核验已有Smoke绑定，再安排受控升级；已有53.30截图不能代替v6线上验证。见 [v6整改](remediation-v6-review-fixes-20261008.md)。
+
+当前本地候选为`evals/memory_candidate_v4.json`，消息内定位已经过隔离库验证。v3包继续保留，尚未构建/部署生产v4镜像；此前生产示例默认值未自动切换。最新验收和费用边界见 [三轮报告](remediation-round3-20261007.md)，不要把以下旧验收数字当作本轮服务器结果。
+
+二轮更新：当前候选包括追加的 `003_memory_neighbor_index.sql`，用于按消息定位邻近块。隔离库已执行并重跑迁移；生产库尚未迁移。默认 API 配置仍为向量基线；`evals/memory_candidate_v3.json` 的 BM25/窗口2/32KiB 配置仅是冻结的本地评测候选，真实模型对照和云端验收后再决定部署。不要直接把旧镜像标签解释为新源码已上线。最新证据见 [二轮报告](remediation-round2-20261007.md)。
+
+2026-10-07新候选说明：当前只完成离线整改，详情见 `remediation-20261007.md`。默认镜像标签改为 `tracememory:v2-local`，新API要求schema=2，并追加 `002_memory_order.sql`。本轮没有执行迁移、构建或重启服务器。未来部署须先在隔离库演练追加迁移，再冻结代码/镜像/依赖/参数并进行真实闭环；不得用下文旧V0的验收证明新候选已部署。
+
 以下是复现与后续部署命令。本次已用用户开启的 Docker 跑通独立 PostgreSQL/pgvector 集成测试及数据库容器重启持久化；最终容器启动证据见 `docs/evidence/20261006-memory/docker.json`。真实模型和公网尚未验收，勿把文档中的全部命令视为已经执行。
+
+2026-10-06 后续状态：本地真实模型验收已完成，见 `evidence/20261006-memory-live/acceptance.md`；公网 HTTP 文档与健康检查已可访问，但正确令牌的云端真实闭环尚未通过，见 `final-acceptance-20261006.md`。当前服务器实际使用宿主机 Nginx，API 映射到 127.0.0.1:8001；下文 Caddy 是另一种部署方案，不应与现有 Nginx 同时占用 80/443。
+
+在服务器已具有最终源码时，可以运行 `sudo bash deploy/accept-memory-server.sh` 收集容器版本、真实小样闭环及 Nginx 检查；加 `--restart` 才执行 API 容器重启后的持久化检查。该脚本使用容器已有环境，不打印凭据；不是官方平台 Smoke，也不替代独立外网鉴权和容量验收。
 
 ## 1. 配置
 

@@ -1,0 +1,40 @@
+{
+  "version": "context-v4",
+  "upstream_sha256": {
+    "evals\\memory_challenge_v2_dev.jsonl": "40074fcd05a4e430697d78aa0fb0298a6094ccc08d3524a59a3d501b4c970172",
+    "evals\\memory_challenge_v2_holdout.jsonl": "7169e66bc19b48f306c1cab7a09b6b8fca6579010344af8cc0c233470a895788",
+    "evals\\memory_stress_v3_dev.jsonl": "aa51b0f7907cad2326f6818ed426c741f944bdb03358d3ac14ec916d5a05bd18",
+    "evals\\memory_stress_v3_holdout.jsonl": "96e807e0015271b684cbe2f6d6c827b4e87cf0bb7805d0f8bbb1bf7cb114042e"
+  },
+  "holdout_policy": "Authored nonblind; frozen before experiments; all outcomes retained",
+  "datasets": {
+    "memory_context_v4_dev.jsonl": {
+      "sha256": "56826378f79d2ecff9f6714367589f846289fccaed6aefebb5fecfbbd502cb66",
+      "nodes": 43,
+      "independent_scenarios": 41,
+      "capabilities": {
+        "A": 4,
+        "B": 11,
+        "C": 6,
+        "D": 7,
+        "E": 5,
+        "G": 5,
+        "H": 5
+      }
+    },
+    "memory_context_v4_holdout.jsonl": {
+      "sha256": "12162febe3928894853ea696e8da4afc166ecf3e9d8b055fc13d3c634b7f6dab",
+      "nodes": 43,
+      "independent_scenarios": 41,
+      "capabilities": {
+        "A": 4,
+        "B": 11,
+        "C": 6,
+        "D": 7,
+        "E": 5,
+        "G": 5,
+        "H": 5
+      }
+    }
+  }
+}
